@@ -1,18 +1,10 @@
 "use client"
-
-         // Need Input form that is submitted when user enters their message, that then gets
-         // added to messages array such that chatgpt is given the entire context of the conversation
-         // the message the user sends, is of typscript type defined 'message', and has the following information in the object
-         // include the role which will be 'user' and the message content as proeprty 'message'
-         // local storage is also updated with new infomration as well as the user state for messages with the 
-         // through functon updatmessahes (This will dynimcally render changes to the chatarea of the react component)
 import React, { useRef } from "react"
 import styled from "styled-components"
 import  ChatBox  from "../../components/chatbox";
 import { message } from "../../components/main";
 import { Input }  from "../../components/ui/textinput"
 import { Button } from "../../components/ui/button"
-
 
 
 localStorage.setItem("ConversationStatus", "closed");
@@ -47,6 +39,10 @@ export default function ChatPage() {
     const msgref = useRef<HTMLDivElement | null>(null);
     const [button_disabled, update_button_disabeld] = React.useState(false);
     const [UserInput, updateUserInput] = React.useState('');
+    const [toggleOne, updatetoggleOne] = React.useState<string | null>('tab-active')
+    const [toggleTwo, updatetoggleTwo] = React.useState<string | null>(null)
+    const [chatvisibility, updatechatvisibility] = React.useState<string | null>(null)
+    const [scenariovisibility, updatescenariovisibility] = React.useState<string | null>('hidden')
     const [conversation_History, update_Conversation_History] = React.useState(() => {
         let messages_array: Array<message> = [];
         let scenario: message = {
@@ -111,26 +107,44 @@ export default function ChatPage() {
 
     }, [conversation_History])
 
+
+    const toggle = (toggle: number) => {
+        if (toggle === 1 && toggleTwo !== null) {
+            updatetoggleTwo(null);
+            updatetoggleOne('tab-active')
+            updatechatvisibility(null)
+            updatescenariovisibility('hidden')
+            return;
+
+        } else if (toggle === 2 && toggleOne !== null) {
+            updatetoggleTwo('tab-active');
+            updatetoggleOne(null)
+            updatescenariovisibility(null)
+            updatechatvisibility('hidden')
+            return;
+        }
+    }
+
     return (
         <Page className="bg-white h-full w-full flex-grow flex flex-col" id="hello">
             <ScenarioOverview className=" flex w-full justify-center items-center">
             <div role="tablist" className="tabs tabs-boxed w-2/5">
-                <a role="tab" className="tab tab-active">Chat</a>
-                <a role="tab" className="tab bg-neutral-content">Scenario</a>
+                <a role="tab" className={`tab bg-neutral-content ${toggleOne}`} onClick={() => {toggle(1)}}>Chat</a>
+                <a role="tab" className={`tab bg-neutral-content ${toggleTwo}`} onClick={() => {toggle(2)}}>Scenario</a>
             </div>
             </ScenarioOverview>
-            <ChatArea className="p-16 overflow-scroll box-border">  
+            <ChatArea className={`${chatvisibility} p-16 overflow-scroll box-border`}>  
                 {conversation_History?.slice(1).map((element) => (
                     <ChatBox ref = {msgref} messageContent= {element.content} UserOrManager= {element.role} disabled = {true}></ChatBox>
                 )
             )}
             </ChatArea>
-            <ScenarioArea className='hidden'>
+            <ScenarioArea className={`${scenariovisibility}`}>
             </ScenarioArea>    
-            <ChatInput className=" flex items-center justify-center">
+            <ChatInput className={`${chatvisibility} flex items-center justify-center`}>
 
             <div className="flex w-full max-w-sm items-center space-x-2">
-                <Input type="email" placeholder="Email"  onChange={user_Input_Change}/>
+                <Input type="email" placeholder="Send Message"  onChange={user_Input_Change}/>
                  <Button disabled = {button_disabled}  onClick={Click} type="submit" variant="outline">Send</Button>
             </div>
 
@@ -138,7 +152,6 @@ export default function ChatPage() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-question"><path d="M12 17h.01"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/></svg>
             </Button>
 
-              
             </ChatInput>
         </Page>
     );
