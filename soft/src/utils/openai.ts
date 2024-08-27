@@ -2,7 +2,7 @@ import { message } from "@/components/main";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
-    apiKey: 'sk-proj-UkWCfaYseSyqPvzdLuffT3BlbkFJ6MaoLfbBge9tNs3f27iQ',
+    apiKey: process.env.OPENAI_API_KEY,
 });
 
 export const SendMessage =  async (data: Array<message>): Promise<string | null> => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import styled from "styled-components"
 import TypingAnimation from "./ui/typinganimaiton";
 
@@ -8,7 +8,7 @@ interface ChatBoxProps {
   disabled: boolean,
 }
 
-export function ChatBox({messageContent, UserOrManager, disabled}: ChatBoxProps ) {
+const ChatBox = forwardRef<HTMLDivElement, ChatBoxProps>(({messageContent, UserOrManager, disabled}, ref) => {
 
   let chat_position ='chat chat-start';
 
@@ -17,7 +17,7 @@ export function ChatBox({messageContent, UserOrManager, disabled}: ChatBoxProps 
     disabled = false;
   } 
   return (
-    <div className={chat_position}>
+    <div className={chat_position} ref = {ref}>
       { disabled ? ( 
               <div className="chat-bubble"><TypingAnimation duration={30} text ={messageContent}/></div> 
             ): (
@@ -27,3 +27,6 @@ export function ChatBox({messageContent, UserOrManager, disabled}: ChatBoxProps 
     </div>
   );
 }
+);
+
+export default ChatBox;

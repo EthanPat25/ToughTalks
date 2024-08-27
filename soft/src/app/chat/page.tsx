@@ -6,9 +6,9 @@
          // include the role which will be 'user' and the message content as proeprty 'message'
          // local storage is also updated with new infomration as well as the user state for messages with the 
          // through functon updatmessahes (This will dynimcally render changes to the chatarea of the react component)
-import React from "react"
+import React, { useRef } from "react"
 import styled from "styled-components"
-import { ChatBox } from "../../components/chatbox";
+import  ChatBox  from "../../components/chatbox";
 import { message } from "../../components/main";
 import TypingAnimation from "../../components/ui/typinganimaiton";
 import { RectangleEllipsis } from 'lucide-react';
@@ -44,6 +44,7 @@ const ScenarioOverview = styled.div`
 
 export default function ChatPage() {
 
+    const msgref = useRef<HTMLDivElement | null>(null);
     const [button_disabled, update_button_disabeld] = React.useState(false);
     const [UserInput, updateUserInput] = React.useState('');
     const [conversation_History, update_Conversation_History] = React.useState(() => {
@@ -103,11 +104,18 @@ export default function ChatPage() {
             update_button_disabeld(false)
         }
     }
+    React.useEffect(() => {
+        if (msgref.current !== null) {
+            msgref.current.scrollIntoView(true)
+        }
+
+    }, [conversation_History])
+
     return (
         <Page className="hello">
-            <ChatArea className="flex-grow-2 p-16">  
+            <ChatArea className="flex-grow-2 p-16 overflow-scroll box-border">  
                 {conversation_History?.slice(1).map((element) => (
-                    <ChatBox messageContent= {element.content} UserOrManager= {element.role} disabled = {true}></ChatBox>
+                    <ChatBox ref = {msgref} messageContent= {element.content} UserOrManager= {element.role} disabled = {true}></ChatBox>
                 )
             )}
             </ChatArea> 
@@ -120,13 +128,3 @@ export default function ChatPage() {
         </Page>
     );
 }
-
-
-`Let’s role-play a phone call. You are a manager, and your employee, {{employee_name}}, who is an {{job_occupation}}, has been with the company for {{time_at_company}}. 
-                They are requesting a reference for a new job. Please ensure that you consider their job as an {{job_occupation}} when responding, taking into account any specific responsibilities or impact this role may have. 
-                Reflect on how this might influence your frustration or concern as a manager.
-                Instructions: Speak naturally and conversationally, reflecting {{manager_name}}'s frustration and the employee’s need for a reference. Use casual, everyday language. 
-                For the response, try something like: 
-                'Hey {{employee_name}}, I just heard you’re asking for a reference. 
-                Can you tell me why you’re looking to leave so soon? 
-                It’s only been {{time_at_company}}.`
