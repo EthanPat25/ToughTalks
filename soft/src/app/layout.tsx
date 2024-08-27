@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/NavBar";
-import { Sidebar, SidebarBody } from "@/components/ui/sidebarfnc";
-import { SidebarDemo } from "@/components/sidebar";
 
 const montserrat = Montserrat({ subsets: ["latin"], weight: ['100', '200', '300', '700'] });
 
@@ -20,7 +18,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={montserrat.className}>
-      <Navbar></Navbar>
         <main className="flex flex-grow h-screen w-screen">
         {children}
         </main>

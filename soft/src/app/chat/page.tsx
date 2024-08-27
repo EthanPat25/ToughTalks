@@ -10,8 +10,9 @@ import React, { useRef } from "react"
 import styled from "styled-components"
 import  ChatBox  from "../../components/chatbox";
 import { message } from "../../components/main";
-import TypingAnimation from "../../components/ui/typinganimaiton";
-import { RectangleEllipsis } from 'lucide-react';
+import { Input }  from "../../components/ui/textinput"
+import { Button } from "../../components/ui/button"
+
 
 
 localStorage.setItem("ConversationStatus", "closed");
@@ -27,15 +28,19 @@ export const Page = styled.div`
 `
 
 export const ChatArea = styled.div`
-    height: 80%;
+    height: 75%;
 `
 
 const ChatInput = styled.div`
-    height: 20%;
+    height: 15%;
 `
 
 const ScenarioOverview = styled.div`
     height: 10%;
+`
+
+const ScenarioArea = styled.div`
+
 `
 
 export default function ChatPage() {
@@ -107,19 +112,37 @@ export default function ChatPage() {
     }, [conversation_History])
 
     return (
-        <Page className="bg-white h-full w-full flex-grow" id="hello">
+        <Page className="bg-white h-full w-full flex-grow flex flex-col" id="hello">
+            <ScenarioOverview className=" flex w-full justify-center items-center">
+            <div role="tablist" className="tabs tabs-boxed w-2/5">
+                <a role="tab" className="tab tab-active">Chat</a>
+                <a role="tab" className="tab bg-neutral-content">Scenario</a>
+            </div>
+            </ScenarioOverview>
             <ChatArea className="p-16 overflow-scroll box-border">  
                 {conversation_History?.slice(1).map((element) => (
                     <ChatBox ref = {msgref} messageContent= {element.content} UserOrManager= {element.role} disabled = {true}></ChatBox>
                 )
             )}
-            </ChatArea> 
-            <ChatInput className="">
-                <div className="flex justify-center">
-                    <input className="input input-bordered input-primary w-full max-w-xs" onChange={user_Input_Change}></input>
-                    <button disabled = {button_disabled} className="btn btn-outline" onClick={Click}>Submit</button>
-                </div>
+            </ChatArea>
+            <ScenarioArea className='hidden'>
+            </ScenarioArea>    
+            <ChatInput className=" flex items-center justify-center">
+
+            <div className="flex w-full max-w-sm items-center space-x-2">
+                <Input type="email" placeholder="Email"  onChange={user_Input_Change}/>
+                 <Button disabled = {button_disabled}  onClick={Click} type="submit" variant="outline">Send</Button>
+            </div>
+
+            <Button disabled = {button_disabled} type="submit" variant="outline" size= "icon" className="rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-question"><path d="M12 17h.01"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/></svg>
+            </Button>
+
+              
             </ChatInput>
         </Page>
     );
 }
+
+
+
