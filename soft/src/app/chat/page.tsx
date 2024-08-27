@@ -23,27 +23,22 @@ interface scenario {
     prompt: string;
 }
 
-const Page = styled.div`
-    flex: 1;
+export const Page = styled.div`
 `
 
-const ChatArea = styled.div`
-    height: 70vh;
-    width: 100vw;
+export const ChatArea = styled.div`
+    height: 80%;
 `
 
 const ChatInput = styled.div`
-    height: 20vh;
-    width: 100vw;
+    height: 20%;
 `
 
 const ScenarioOverview = styled.div`
-    height: 10vh;
-    width: 100vw;
+    height: 10%;
 `
 
 export default function ChatPage() {
-
     const msgref = useRef<HTMLDivElement | null>(null);
     const [button_disabled, update_button_disabeld] = React.useState(false);
     const [UserInput, updateUserInput] = React.useState('');
@@ -112,14 +107,14 @@ export default function ChatPage() {
     }, [conversation_History])
 
     return (
-        <Page className="hello">
-            <ChatArea className="flex-grow-2 p-16 overflow-scroll box-border">  
+        <Page className="bg-white h-full w-full flex-grow" id="hello">
+            <ChatArea className="p-16 overflow-scroll box-border">  
                 {conversation_History?.slice(1).map((element) => (
                     <ChatBox ref = {msgref} messageContent= {element.content} UserOrManager= {element.role} disabled = {true}></ChatBox>
                 )
             )}
             </ChatArea> 
-            <ChatInput className="flex-grow-1">
+            <ChatInput className="">
                 <div className="flex justify-center">
                     <input className="input input-bordered input-primary w-full max-w-xs" onChange={user_Input_Change}></input>
                     <button disabled = {button_disabled} className="btn btn-outline" onClick={Click}>Submit</button>
