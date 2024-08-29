@@ -1,16 +1,12 @@
 import React from "react";
-
-import { AnimatePresence, motion } from "framer-motion";
-import { CanvasRevealEffect } from "../canvas-reveal-effect";
 import styled from "styled-components"
-import {Navbar} from "./NavBar"
 import {Typewriter} from "./Type"
 import {ScenarioSection} from "./Scenarios"
-import { WobbleCard } from "./ui/wobble-card";
 // import {SendMessage} from "../app/app"
+import Convo from "./convoanimation";
 
 const Container = styled.div`
-    height: 110vh;
+    height: 90vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -76,24 +72,31 @@ export function Main() {
     <section>
     <Container>
         <Blueframe>
-          <StartNow className = "flex flex-col items-center">
-            <div className="flex-grow: 1">
-            <Typewriter></Typewriter>
+          <StartNow id="startnow" className = "flex flex-col items-start">
+            <div className="grow-[0.5] shrink-[1]">
+              <Typewriter></Typewriter>
             </div>
-            <div className="flex-grow: 1">
-            <p style={{color: "#181945", marginTop: "30px", marginBottom: "25px"}}>
-              Master difficult conversations with ease.
-              Whether you're negotiating a raise, addressing 
-              an unhappy client, or learning to assert yourself, 
-              ToughTalks leverages AI to provide realistic simulations 
-              across unqiue scenarios. Navigate your professional challenges confidently with ToughTalks.
-            </p>
+            <div className="grow-[2]">
+              <p className = "text-xl text-pretty" style={{color: "#181945", marginTop: "30px", marginBottom: "25px"}}>
+                Master difficult conversations with ease.
+                Whether you're negotiating a raise, addressing 
+                an unhappy client, or learning to assert yourself, 
+                ToughTalks leverages AI to provide realistic simulations 
+                across unqiue scenarios. Navigate your professional challenges confidently with ToughTalks.
+              </p>
             </div>
-            <div className="flex-grow: 1">
-            <button onClick={Click} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-primary">Try Now</button>
-            </div>
+             <div className=" flex flex-1 justify-around w-full">
+             <button onClick={Click} className="px-8 py-2 lg:w-52 lg:h-14 bg-[rgb(123,97,355)] text-white text-sm rounded-lg font-semibold hover:bg-[rgb(123,97,355)]/[0.8] hover:shadow-lg">
+             Try Now
+            </button>     
+            <button onClick={Click} className="px-8 py-2 lg:w-52 lg:h-14 bg-[rgb(74,144,226)] text-white text-sm rounded-lg font-semibold hover:bg-[rgb(74,144,226)]/[0.8] hover:shadow-lg mr-16">
+            Learn More
+            </button>           
+              </div>
           </StartNow>
-          <InfoGraphic>
+          <InfoGraphic className="flex justify-center items-center">
+            <Convo></Convo>
+            <div className="rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-60"></div>
           </InfoGraphic>
         </Blueframe>
     </Container>

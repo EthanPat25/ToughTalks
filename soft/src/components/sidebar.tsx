@@ -80,8 +80,7 @@ export const Logo = () => {
         animate={{ opacity: 1 }}
         className="font-medium text-black dark:text-white whitespace-pre"
       >
-                <a className="btn btn-ghost text-xl" style={{marginLeft: "4%"}}>ToughTalks</a>
-
+        <Link href={'/'} className="btn btn-ghost text-xl" style={{marginLeft: "4%"}}>ToughTalks</Link>
       </motion.span>
     </Link>
   );

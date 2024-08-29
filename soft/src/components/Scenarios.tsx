@@ -53,8 +53,8 @@ export function ScenarioSection() {
             Try From Our Scenarios
             </motion.h1>
         </div>
-        <div style={{width: "50%", display: "flex", alignItems: "center", justifyContent: "center"}}>
-          <p style={{fontWeight: "400", color: "#74758f", fontSize: "18px"}}>Develop Important Soft Skills</p>
+        <div className = "text-center" style={{width: "50%", display: "flex", alignItems: "center", justifyContent: "center"}}>
+          <p className="ml-5" style={{fontWeight: "400", color: "#74758f", fontSize: "18px"}}>Develop Important Soft Skills. Our Learning modules are tailored towards industry relevant scenarios </p>
         </div>
       </ScenarioIntro>
       <div className="grid grid-cols-2 gap-6 gap-y-6 p-6 flex-grow-3">
