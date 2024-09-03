@@ -6,6 +6,7 @@ import { WobbleCard } from "./ui/wobble-card";
 import { Headset } from 'lucide-react';
 import { Speech } from 'lucide-react';
 import { Handshake } from 'lucide-react';
+import Customerservice from "@/components/customerservicepopup";
 
 
 const ScenarioCards = styled.div`
@@ -32,11 +33,15 @@ const ScenarioEnd = styled.div`
   justify-content: center;
 `
 
-export function ScenarioSection() {
+interface childprops {
+}
+
+export const ScenarioSection = React.forwardRef<HTMLDivElement | null>(({}, ref) => {
+
   return (
     <Container className="flex flex-col">
       <ScenarioIntro className="flex-grow-1">
-        <div style={{width: "50%", display: "flex", flexDirection: "column", alignItems: "start", justifyContent: "center"}}>
+        <div ref={ref} style={{width: "50%", display: "flex", flexDirection: "column", alignItems: "start", justifyContent: "center"}}>
           <motion.h4 
           style = {{fontWeight: "600", color: "#583fbc", fontSize: "14px"}}
            initial = {{ opacity: 0.4, scale: 0.5}}
@@ -74,9 +79,9 @@ export function ScenarioSection() {
               </p>
             </div>
             <div className="flex justify-center mt-8">
-              <button className="px-6 py-2 bg-[rgb(58,80,244)] text-white rounded-lg font-bold transform hover:-translate-y-1 transition duration-400">
-                Start Training Now
-              </button>
+
+            <Customerservice></Customerservice>
+        
             </div>
         </WobbleCard>
         <WobbleCard containerClassName = "min-h-[400px] bg-[rgb(90,159,243)]">
@@ -120,6 +125,8 @@ export function ScenarioSection() {
       </div>
   </Container>
   );
-}
+});
+  
+ 
 
 

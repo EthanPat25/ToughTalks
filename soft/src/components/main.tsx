@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components"
 import {Typewriter} from "./Type"
 import {ScenarioSection} from "./Scenarios"
-// import {SendMessage} from "../app/app"
 import Convo from "./convoanimation";
 
 const Container = styled.div`
@@ -53,20 +52,8 @@ export type message = BaseMessage | FunctionMessage;
 
 
 export function Main() {
-  const Click =  async () => {
-    try {
-      const response = await fetch('/api/openai', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json', // Ensure JSON content type
-        },
-        body: JSON.stringify({Message: "Let's role-play a phone call. You are an upset manager, who lacks respect for boundaries.  You have received a call from your employee of 2 months, who is asking for a reference to apply for a new job. You want an explanation from this employee.  I am the employee. You'll start the first sentence, as you are the one answering the phonecall."})
-      });
-      console.log( await response.json()); 
-    } catch {
-      console.log(" await error");
-    }
-  }
+
+  const sub_title = React.useRef<HTMLDivElement | null>(null);
 
   return (
     <section>
@@ -86,10 +73,10 @@ export function Main() {
               </p>
             </div>
              <div className=" flex flex-1 justify-around w-full">
-             <button onClick={Click} className="px-8 py-2 lg:w-52 lg:h-14 bg-[rgb(123,97,355)] text-white text-sm rounded-lg font-semibold hover:bg-[rgb(123,97,355)]/[0.8] hover:shadow-lg">
+             <button onClick={() => {sub_title.current?.scrollIntoView({behavior: "smooth"})}} className="px-8 py-2 lg:w-52 lg:h-14 bg-[rgb(123,97,355)] text-white text-sm rounded-lg font-semibold hover:bg-[rgb(123,97,355)]/[0.8] hover:shadow-lg">
              Try Now
             </button>     
-            <button onClick={Click} className="px-8 py-2 lg:w-52 lg:h-14 bg-[rgb(74,144,226)] text-white text-sm rounded-lg font-semibold hover:bg-[rgb(74,144,226)]/[0.8] hover:shadow-lg mr-16">
+            <button className="px-8 py-2 lg:w-52 lg:h-14 bg-[rgb(74,144,226)] text-white text-sm rounded-lg font-semibold hover:bg-[rgb(74,144,226)]/[0.8] hover:shadow-lg mr-16">
             Learn More
             </button>           
               </div>
@@ -100,7 +87,7 @@ export function Main() {
           </InfoGraphic>
         </Blueframe>
     </Container>
-      <ScenarioSection>
+      <ScenarioSection ref = {sub_title}>
       </ScenarioSection>
       </section>
   );
