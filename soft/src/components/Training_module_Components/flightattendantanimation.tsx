@@ -1,6 +1,6 @@
 import React from 'react';
 import { Player } from '@lordicon/react';
-const ICON = require('../../public/flight_attendant.json');
+const ICON = require('../../../public/flight_attendant.json');
 
 interface airlineprops {
     animate: boolean;
