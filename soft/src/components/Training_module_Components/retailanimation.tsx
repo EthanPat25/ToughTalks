@@ -1,6 +1,6 @@
 import React from 'react';
 import { Player } from '@lordicon/react';
-const ICON = require('../../public/retail.json');
+const ICON = require('../../../public/retail.json');
 export default function Retailanimation() {    
   const playerRef = React.useRef<Player>(null);
     React.useEffect(() => {
