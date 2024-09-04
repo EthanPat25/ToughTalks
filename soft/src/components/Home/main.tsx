@@ -86,7 +86,7 @@ export function Main() {
             <div className="rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-60"></div>
           </InfoGraphic>
         </Blueframe>
-    </Container>
+      </Container>
       <ScenarioSection ref = {sub_title}>
       </ScenarioSection>
       </section>
