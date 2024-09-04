@@ -1,11 +1,11 @@
 "use client"
 
 import React from 'react'
-import { Button } from './ui/button'
+import { Button } from '../ui/button'
 //import { Carousel, CarouselContent, CarouselItem, CarouselNext } from '@/components/ui/carousel'
-import Flight_attendant from '@/components/flightattendantanimation'
-import Retailanimation from '@/components/retailanimation'
-import { EmblaCarousel } from '@/components/ui/carousel'
+import Flight_attendant from '@/components/Training_module_Components/flightattendantanimation'
+import Retailanimation from '@/components/Training_module_Components/retailanimation'
+import { EmblaCarousel } from '@/components/Training_module_Components/carousel'
 import {
   Dialog,
   DialogClose,

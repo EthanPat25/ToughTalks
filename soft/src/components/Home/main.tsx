@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components"
 import {Typewriter} from "./Type"
-import {ScenarioSection} from "./Scenarios"
-import Convo from "./convoanimation";
+import {ScenarioSection} from "../Training_module_Components/Scenarios"
+import Convo from "../Training_module_Components/convoanimation";
 
 const Container = styled.div`
     height: 90vh;

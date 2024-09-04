@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import styled from "styled-components"
-import TypingAnimation from "./ui/typinganimaiton";
+import TypingAnimation from "../ui/typinganimaiton";
 
 interface ChatBoxProps {
   messageContent: string,

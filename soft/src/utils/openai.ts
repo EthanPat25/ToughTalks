@@ -1,4 +1,4 @@
-import { message } from "@/components/main";
+import { message } from "../components/Home/main";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
