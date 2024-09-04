@@ -2,9 +2,9 @@
 
 import React from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
-import { Button } from './button'
-import Retailanimation from '@/components/retailanimation'
-import Flight_attendant from '@/components/flightattendantanimation'
+import { Button } from '../ui/button'
+import Retailanimation from '@/components/Training_module_Components/retailanimation'
+import Flight_attendant from '@/components/Training_module_Components/flightattendantanimation'
 import styled from 'styled-components'
 import Link from 'next/link'
 

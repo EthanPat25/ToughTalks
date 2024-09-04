@@ -1,5 +1,5 @@
 
-import { SidebarDemo } from "@/components/sidebar";
+import { SidebarDemo } from "../../components/Chat_Components/sidebar";
 
 export default function RootLayout({
   children,

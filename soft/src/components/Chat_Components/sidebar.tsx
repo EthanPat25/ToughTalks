@@ -1,6 +1,6 @@
 "use client";
 import React, { ReactNode, useState } from "react";
-import { Sidebar, SidebarBody, SidebarLink } from "../components/ui/sidebarfnc";
+import { Sidebar, SidebarBody, SidebarLink } from "../../components/ui/sidebarfnc";
 import {
   IconArrowLeft,
   IconBrandTabler,
@@ -9,7 +9,7 @@ import {
 } from "@tabler/icons-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 
 export const SidebarDemo = ({children}: dashboardprop) => {
   const links = [

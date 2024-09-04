@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { gsap } from "gsap";
 import { motion } from "framer-motion";
-import { WobbleCard } from "./ui/wobble-card";
+import { WobbleCard } from "../ui/wobble-card";
 import { Headset } from 'lucide-react';
 import { Speech } from 'lucide-react';
 import { Handshake } from 'lucide-react';
-import Customerservice from "@/components/customerservicepopup";
+import Customerservice from "../Training_module_Components/customerservicepopup";
 
 
 const ScenarioCards = styled.div`
