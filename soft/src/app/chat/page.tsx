@@ -9,8 +9,8 @@ import { FlipText } from "../../components/ui/flip_textEffect";
 import Joshua from "@/components/Training_module_Components/Joshua";
 import { Progress } from "../../components/ui/ProgressBar"
 import Ryan from "@/components/Training_module_Components/Ryan";
-
-
+import { InView } from 'react-intersection-observer';
+import { motion, useScroll, useSpring, useTransform} from "motion/react";
 
 
 localStorage.setItem("ConversationStatus", "closed");
@@ -48,8 +48,17 @@ export default function ChatPage() {
     const [toggleOne, updatetoggleOne] = React.useState<string | null>('tab-active')
     const [toggleTwo, updatetoggleTwo] = React.useState<string | null>(null)
     const [chatvisibility, updatechatvisibility] = React.useState<string | null>(null)
-    const [scenariovisibility, updatescenariovisibility] = React.useState<string | null>('hidden')
-    const [progress, setProgress] = React.useState(5);
+    const [scenariovisibility, updatescenariovisibility] = React.useState<string | null>('hidden');
+    const pageRef = useRef(null);
+    const { scrollYProgress } = useScroll({
+        container: pageRef});
+    const transform = useTransform(scrollYProgress, [0, 1], [0.03, 1]);
+    const scaleX = useSpring(transform, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+      })
+
     const [conversation_History, update_Conversation_History] = React.useState(() => {
         let messages_array: Array<message> = [];
         let scenario: message = {
@@ -66,6 +75,7 @@ export default function ChatPage() {
         messages_array.push(scenario)
         return messages_array as Array<message>
     });
+
 
     const user_Input_Change = (event: any) => {
         updateUserInput(event.target.value)
@@ -114,7 +124,6 @@ export default function ChatPage() {
 
     }, [conversation_History])
 
-
     const toggle = (toggle: number) => {
         if (toggle === 1 && toggleTwo !== null) {
             updatetoggleTwo(null);
@@ -133,9 +142,11 @@ export default function ChatPage() {
     }
 
     return (
-        <Page className="bg-white h-full w-full flex-grow flex flex-col overflow-scroll" id="hello">
+        <Page ref={pageRef}
+       // Directly animating the Page component
+       className="bg-white h-full w-full flex-grow flex flex-col overflow-scroll" id="hello">
             <ScenarioOverview className="bg-white flex justify-center items-center grow-[1] shrink-[1] basis-0 w-full rounded-br-lg rounded-bl-lg sticky top-0">
-                <Progress value={progress} className="w-1/5 mb-10 sticky top-1 mt-10" />
+                <Progress scaleX = {scaleX} className="w-1/5 mb-10 sticky top-1 mt-10" />
             </ScenarioOverview>
             {/*
             <ChatArea className={`${chatvisibility} p-16 overflow-scroll box-border grow-[3] shrink-[1] basis-0`}>  
@@ -152,10 +163,12 @@ export default function ChatPage() {
                 <h2 className="font-extrabold text-xl mt-5">Conversation:</h2>
             </div>
             <div className=" ml-52 mr-52 p-10 grow-[3] shrink-[1] basis-0 flex flex-col">
+                <InView>
                 <div className="flex flex-row" id="Hello"> 
                     <div><Joshua animate = {true}></Joshua></div>
                     <div className="">Jamie, did you send the report to the client yesterday?</div>
                 </div>
+                </InView>
                 <div className="flex flex-row-reverse" id="Hello">
                     <div><Ryan animate = {true}></Ryan></div>
                     <div className="">Jamie, did you send the report to the client yesterday?</div>
