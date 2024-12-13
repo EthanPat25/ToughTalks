@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react";
 import styled from "styled-components";
 import { gsap } from "gsap";
@@ -7,6 +9,8 @@ import { Headset } from 'lucide-react';
 import { Speech } from 'lucide-react';
 import { Handshake } from 'lucide-react';
 import Customerservice from "../Training_module_Components/customerservicepopup";
+import Customer from "./Customer";
+import ConflictResolution from "./ConflictResolution";
 
 
 const ScenarioCards = styled.div`
@@ -55,7 +59,7 @@ export const ScenarioSection = React.forwardRef<HTMLDivElement | null>(({}, ref)
           animate={{ opacity: 1, scale: 1 }}
           transition={{duration: 1}}
           >
-            Try From Our Scenarios
+            Choose a Learning Module
             </motion.h1>
         </div>
         <div className = "text-center" style={{width: "50%", display: "flex", alignItems: "center", justifyContent: "center"}}>
@@ -66,7 +70,9 @@ export const ScenarioSection = React.forwardRef<HTMLDivElement | null>(({}, ref)
         <WobbleCard containerClassName = " flex min-h-[400px] bg-[rgb(122,87,207)]" >
           <div className="flex justify-center">
             <div className="flex justify-center">
-              <Headset size={50}/>
+
+            <Customer animate = {true}></Customer>
+              
                </div>
           </div>
     
@@ -86,37 +92,19 @@ export const ScenarioSection = React.forwardRef<HTMLDivElement | null>(({}, ref)
         </WobbleCard>
         <WobbleCard containerClassName = "min-h-[400px] bg-[rgb(90,159,243)]">
           <div className="flex justify-center">
-          <Speech size={50} />
+          <ConflictResolution animate = {true}></ConflictResolution>
           </div>
           <div className="">
             <div className="flex justify-center mb-2">
-            <h1 className="font-bold">Employee Feedback Training Module</h1>
+            <h1 className="font-bold">Conflict Resolution Training Module</h1>
             </div>
-              <p>Learn how to give constructive feedback that truly motivates and inspires. 
-                Get real-time insights from our AI to help you fine-tune your approach 
-                and avoid common mistakes.
+              <p>Build your skills in navigating tough workplace conflicts.
+               Our AI guides you through real-life scenarios, where you'll 
+               be asked to identify the cause of the conflict and suggest 
+               practical ways to bring the conflict to a resolution.
               </p>
           </div>
           <div className="flex justify-center mt-7">
-            <button className="px-6 py-2 bg-[rgb(58,80,244)] text-white rounded-lg font-bold transform hover:-translate-y-1 transition duration-400">
-              Start Training Now
-            </button>
-          </div>
-        </WobbleCard>
-        <WobbleCard containerClassName = "col-span-2 min-h-[500px] bg-[rgb(124,143,191)] ">
-          <div className="flex justify-center">
-          <Handshake size={50}/>
-          </div>
-          <div>
-            <div className="flex justify-center">
-            <h1 className="font-bold">Conflict Resolution Training Module</h1>
-            </div>
-            <p>Build your skills in navigating tough workplace conflicts.
-               Our AI guides you through real-life scenarios, where you'll 
-               be asked to identify the cause of the conflict and suggest 
-               practical ways to bring the conflict to a resolution</p>
-          </div>
-          <div className="flex justify-center mt-12">
             <button className="px-6 py-2 bg-[rgb(58,80,244)] text-white rounded-lg font-bold transform hover:-translate-y-1 transition duration-400">
               Start Training Now
             </button>

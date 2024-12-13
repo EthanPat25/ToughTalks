@@ -2,7 +2,7 @@ import { message } from "../components/Home/main";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
+    apiKey: process.env.OPENAI_API_KEY
 });
 
 export const SendMessage =  async (data: Array<message>): Promise<string | null> => {
@@ -13,6 +13,7 @@ export const SendMessage =  async (data: Array<message>): Promise<string | null>
             messages: data,
             model: "gpt-4o",
         });
+        console.log(completion);
         // Add Logic for when openai returns back not a string
         return completion.choices[0].message.content;
     } catch (error) {

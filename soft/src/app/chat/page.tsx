@@ -5,6 +5,12 @@ import  ChatBox  from "../../components/Chat_Components/chatbox";
 import { message } from "../../components/Home/main";
 import { Input }  from "../../components/ui/textinput"
 import { Button } from "../../components/ui/button"
+import { FlipText } from "../../components/ui/flip_textEffect";
+import Joshua from "@/components/Training_module_Components/Joshua";
+import { Progress } from "../../components/ui/ProgressBar"
+import Ryan from "@/components/Training_module_Components/Ryan";
+
+
 
 
 localStorage.setItem("ConversationStatus", "closed");
@@ -43,6 +49,7 @@ export default function ChatPage() {
     const [toggleTwo, updatetoggleTwo] = React.useState<string | null>(null)
     const [chatvisibility, updatechatvisibility] = React.useState<string | null>(null)
     const [scenariovisibility, updatescenariovisibility] = React.useState<string | null>('hidden')
+    const [progress, setProgress] = React.useState(5);
     const [conversation_History, update_Conversation_History] = React.useState(() => {
         let messages_array: Array<message> = [];
         let scenario: message = {
@@ -126,36 +133,76 @@ export default function ChatPage() {
     }
 
     return (
-        <Page className="bg-white h-full w-full flex-grow flex flex-col" id="hello">
-            <ScenarioOverview className=" flex w-full justify-center items-center">
-            <div role="tablist" className="tabs tabs-boxed w-2/5">
-                <a role="tab" className={`tab bg-neutral-content ${toggleOne}`} onClick={() => {toggle(1)}}>Chat</a>
-                <a role="tab" className={`tab bg-neutral-content ${toggleTwo}`} onClick={() => {toggle(2)}}>Scenario</a>
-            </div>
+        <Page className="bg-white h-full w-full flex-grow flex flex-col overflow-scroll" id="hello">
+            <ScenarioOverview className="bg-white flex justify-center items-center grow-[1] shrink-[1] basis-0 w-full rounded-br-lg rounded-bl-lg sticky top-0">
+                <Progress value={progress} className="w-1/5 mb-10 sticky top-1 mt-10" />
             </ScenarioOverview>
-            <ChatArea className={`${chatvisibility} p-16 overflow-scroll box-border`}>  
+            {/*
+            <ChatArea className={`${chatvisibility} p-16 overflow-scroll box-border grow-[3] shrink-[1] basis-0`}>  
                 {conversation_History?.slice(1).map((element) => (
                     <ChatBox ref = {msgref} messageContent= {element.content} UserOrManager= {element.role} disabled = {true}></ChatBox>
                 )
             )}
             </ChatArea>
-            <ScenarioArea className={`${scenariovisibility}`}>
-            </ScenarioArea>    
-            <ChatInput className={`${chatvisibility} flex items-center justify-center`}>
+            */}
 
-            <div className="flex w-full max-w-sm items-center space-x-2">
-                <Input type="email" placeholder="Send Message"  onChange={user_Input_Change}/>
-                 <Button disabled = {button_disabled}  onClick={Click} type="submit" variant="outline">Send</Button>
+            <div className="ml-60 mr-60 mt-5">
+                <h1 className="font-extrabold text-xl mb-5">Scenario: "Who Was Supposed to Send it?"</h1>
+                <p>Joshua and Ryan are working on a team project and have mistaken each others responsibilities. As a result, a deadline was missed.</p>
+                <h2 className="font-extrabold text-xl mt-5">Conversation:</h2>
+            </div>
+            <div className=" ml-52 mr-52 p-10 grow-[3] shrink-[1] basis-0 flex flex-col">
+                <div className="flex flex-row" id="Hello"> 
+                    <div><Joshua animate = {true}></Joshua></div>
+                    <div className="">Jamie, did you send the report to the client yesterday?</div>
+                </div>
+                <div className="flex flex-row-reverse" id="Hello">
+                    <div><Ryan animate = {true}></Ryan></div>
+                    <div className="">Jamie, did you send the report to the client yesterday?</div>
+                </div>
+                <div className="flex flex-row" id="Hello">
+                    <div><Joshua animate = {true}></Joshua></div>
+                    <div className="">Jamie, did you send the report to the client yesterday?</div>
+                </div>
+                <div className="flex flex-row-reverse" id="Hello">
+                    <div><Ryan animate = {true}></Ryan></div>
+                    <div className="">Jamie, did you send the report to the client yesterday?</div>
+                </div>
+                <div className="flex flex-row" id="Hello">
+                    <div><Joshua animate = {true}></Joshua></div>
+                    <div className="">Jamie, did you send the report to the client yesterday?</div>
+                </div>
             </div>
 
-            <Button disabled = {button_disabled} type="submit" variant="outline" size= "icon" className="rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17h.01"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/></svg>
-            </Button>
-
-            </ChatInput>
+            <div className="w-full flex justify-center items-center grow-[2] shrink-[1] basis-0">
+            <div className="bg-[rgb(248,248,248)] w-1/2 h-3/4 rounded-lg shadow-inner flex-row p-3 mb-20 mt-20">
+            <div className="flex flex-col items-center justify-center mb-5">
+                <h1 className="font-bold">Your Answer</h1>
+                <p className="text-center">It Seems theres been a mistunderstanding between Joshua and Ryan. which has created the risk of workplace Conflict. Answer the following questions to help Joshua and Ryan resolve the issue and move forward:</p>
+            </div>
+                <FlipText
+                    className="text-md text-black dark:text-white font-bold"
+                    word="What Was The Miscommunication?"
+                />
+                <ChatInput className={`${chatvisibility} flex items-center justify-center mt-3`}>
+                <div className="flex w-full max-w-sm items-center space-x-2">
+                    <Input type="email" placeholder="Type Your Response"  onChange={user_Input_Change}/>
+                    <Button disabled = {button_disabled}  onClick={Click} type="submit" variant="outline">Check</Button>
+                </div>
+                </ChatInput>
+                <FlipText
+                    className="text-md text-black dark:text-white mt-8 font-bold"
+                    word="How can Joshua and Ryan resolve this misunderstanding?"
+                />
+                <ChatInput className={`${chatvisibility} flex items-center justify-center mt-3`}>
+                <div className="flex w-full max-w-sm items-center space-x-2">
+                    <Input type="email" placeholder="Type Your Response"  onChange={user_Input_Change}/>
+                    <Button className = "rounded-xl" disabled = {button_disabled}  onClick={Click} type="submit" variant="outline">Check</Button>
+                </div>
+                </ChatInput>
+            </div>
+            </div>
         </Page>
     );
 }
-
-
 

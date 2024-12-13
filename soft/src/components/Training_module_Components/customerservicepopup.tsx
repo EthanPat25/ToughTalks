@@ -27,7 +27,7 @@ const Customerservice = () => {
           Start Training Now
         </button>
       </DialogTrigger>
-      <DialogContent className='h-3/5 w-[80%] sm:h-4/5 sm:w-[60%]'>
+      <DialogContent className='h-3/5 w-[80%] sm:h-4/5 sm:w-[60%] rounded-3xl'>
             <EmblaCarousel close = {          
                 <DialogClose asChild>
                   <Button type="button" variant="secondary">

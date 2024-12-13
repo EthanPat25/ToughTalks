@@ -2,13 +2,13 @@
 
 import React from 'react';
 import { Player } from '@lordicon/react';
-const ICON = require('../../../public/retail.json');
+const ICON = require('../../../public/TechSupport.json');
 
 interface airlineprops {
     animate: boolean;
 }
 
-export default function Retailanimation({animate}: airlineprops) {    
+export default function TechSupport({animate}: airlineprops) {    
   const playerRef = React.useRef<Player>(null);
     React.useEffect(() => {
         playerRef.current?.playFromBeginning();

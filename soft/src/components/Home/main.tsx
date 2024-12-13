@@ -12,6 +12,7 @@ const Container = styled.div`
     align-items: center;
 `
 
+
 const Blueframe = styled.div`
     height: 100%;
     width: 96%;
@@ -19,6 +20,9 @@ const Blueframe = styled.div`
     border-radius: 60px;
     display: flex;
 `
+
+
+
 const InfoGraphic = styled.div`
   height: 100%;
   width: 50%;
@@ -26,6 +30,7 @@ const InfoGraphic = styled.div`
   border-top-right-radius: 60px;
   border-bottom-right-radius: 60px;
 `
+
 
 const StartNow = styled.div`
   height: 100%;
@@ -36,6 +41,7 @@ const StartNow = styled.div`
   border-top-left-radius: 60px;
   border-bottom-left-radius: 60px;
 `
+
 
 interface BaseMessage {
   role: 'system' | 'user' | 'assistant';
@@ -58,7 +64,7 @@ export function Main() {
   return (
     <section>
     <Container>
-        <Blueframe>
+       <Blueframe>
           <StartNow id="startnow" className = "flex flex-col items-start">
             <div className="grow-[0.5] shrink-[1]">
               <Typewriter></Typewriter>

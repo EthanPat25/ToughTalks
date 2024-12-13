@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react';
 import { Player } from '@lordicon/react';
 const ICON = require('../../../public/flight_attendant.json');
@@ -30,10 +32,10 @@ export default function Flight_attendant({animate}: airlineprops) {
 
     React.useEffect(() => {
         if (windowsize > 640) {
-            updatesize(250)
+            updatesize(400)
         } 
         else if (windowsize <= 640) {
-            updatesize(180)
+            updatesize(250)
         } 
     },[windowsize])
 

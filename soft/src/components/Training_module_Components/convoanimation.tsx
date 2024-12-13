@@ -1,3 +1,5 @@
+"client"
+
 import React from 'react';
 import { Player } from '@lordicon/react';
 const ICON = require('../../../public/animation.json');
@@ -15,3 +17,4 @@ export default function Convo() {
         />
     );
 }
+
