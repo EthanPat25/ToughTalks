@@ -157,19 +157,19 @@ export default function ChatPage() {
             </ChatArea>
             */}
 
-            <div className="ml-60 mr-60 mt-5 z-40">
+            <div className=" md:ml-10 xl:ml-60 xl:mr-60 xl:mt-5 z-40">
                 <h1 className="font-extrabold text-xl mb-5">Scenario: "Who Was Supposed to Send it?"</h1>
                 <p>Joshua and Ryan are working on a team project and have mistaken each others responsibilities. As a result, a deadline was missed.</p>
                 <h2 className="font-extrabold text-xl mt-5">Conversation:</h2>
             </div>
-            <div className=" ml-52 mr-52 p-10 grow-[3] shrink-[1] basis-0 flex flex-col z-40">
+            <div className=" md:ml-10 xl:ml-52 xl:mr-52 p-10 grow-[3] shrink-[1] basis-0 flex flex-col z-40">
                 <InView>
                 <div className="flex flex-row" id="Hello"> 
                     <div>
                         <div><Joshua animate = {true}></Joshua></div>
                         <h2 className="text-center font-semibold">Joshua</h2>
                     </div>
-                    <div className="pr-72">
+                    <div className="xl:pr-72">
                     <div className="chat chat-start">
                         <p className="chat-bubble">Jamie, did you send the report to the client yesterday?</p>
                         </div>
@@ -181,7 +181,7 @@ export default function ChatPage() {
                     <div><Ryan animate = {true}></Ryan></div>
                         <h2 className="text-center font-semibold">Ryan</h2>
                     </div>
-                    <div className="pl-72">
+                    <div className=" md:pl-10 xl:pl-72">
                     <div className="chat chat-end">
                         <p className="chat-bubble">Jamie, did you send the report to the client yesterday?</p>
                     </div>
@@ -192,7 +192,7 @@ export default function ChatPage() {
                     <div><Joshua animate = {true}></Joshua></div>
                         <h2 className="text-center font-semibold">Joshua</h2>
                     </div>
-                    <div className="pr-72">
+                    <div className="xl:pr-72">
                     <div className="chat chat-start">
                         <p className="chat-bubble">Jamie, did you send the report to the client yesterday?</p>
                     </div>
@@ -203,7 +203,7 @@ export default function ChatPage() {
                     <div><Ryan animate = {true}></Ryan></div>
                         <h2 className="text-center font-semibold">Ryan</h2>
                     </div>
-                    <div className="pl-72">
+                    <div className="xl:pl-72">
                     <div className="chat chat-end">
                         <p className="chat-bubble">Jamie, did you send the report to the client yesterday?</p>
                         </div>
@@ -214,7 +214,7 @@ export default function ChatPage() {
                     <div><Joshua animate = {true}></Joshua></div>
                         <h2 className="text-center font-semibold">Joshua</h2>
                     </div>
-                    <div className="pr-72">
+                    <div className="xl:pr-72">
                         <div className="chat chat-start">
                         <p className="chat-bubble">Jamie, did you send the report to the client yesterday?</p>
                         </div>

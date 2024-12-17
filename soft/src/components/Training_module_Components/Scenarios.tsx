@@ -66,7 +66,7 @@ export const ScenarioSection = React.forwardRef<HTMLDivElement | null>(({}, ref)
           <p className="ml-5" style={{fontWeight: "400", color: "#74758f", fontSize: "18px"}}>Develop Important Soft Skills. Our Learning modules are tailored towards industry relevant scenarios </p>
         </div>
       </ScenarioIntro>
-      <div className="grid grid-cols-2 gap-6 gap-y-6 p-6 flex-grow-3">
+      <div className="grid grid-cols-2 gap-6 gap-y-6 p-6 flex-grow-3 xs:flex xs:flex-wrap lg:flex-nowrap lg:flex-none">
         <WobbleCard containerClassName = " flex min-h-[400px] bg-[rgb(122,87,207)]" >
           <div className="flex justify-center">
             <div className="flex justify-center">
@@ -75,7 +75,6 @@ export const ScenarioSection = React.forwardRef<HTMLDivElement | null>(({}, ref)
               
                </div>
           </div>
-    
             <div className="">
               <div className="flex justify-center">
                 <h1 className="font-bold">Customer Service Training Module</h1>

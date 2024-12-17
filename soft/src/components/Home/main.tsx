@@ -73,7 +73,7 @@ const Convo = dynamic(() => import("../Training_module_Components/convoanimation
               <Typewriter></Typewriter>
             </div>
             <div className="grow-[2]">
-              <p className = "text-xl text-pretty" style={{color: "#181945", marginTop: "30px", marginBottom: "25px"}}>
+              <p className = "xs:hidden md:block text-xl text-pretty" style={{color: "#181945", marginTop: "30px", marginBottom: "25px"}}>
                 Master difficult conversations with ease.
                 Whether you're negotiating a raise, addressing 
                 an unhappy client, or learning to assert yourself, 
