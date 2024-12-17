@@ -145,7 +145,7 @@ export default function ChatPage() {
         <Page ref={pageRef}
        // Directly animating the Page component
        className="bg-white h-full w-full flex-grow flex flex-col overflow-scroll" id="hello">
-            <ScenarioOverview className="bg-white flex justify-center items-center grow-[1] shrink-[1] basis-0 w-full rounded-br-lg rounded-bl-lg sticky top-0">
+            <ScenarioOverview className="bg-white flex justify-center items-center grow-[1] shrink-[1] basis-0 w-full rounded-br-lg rounded-bl-lg sticky top-0 z-50">
                 <Progress scaleX = {scaleX} className="w-1/5 mb-10 sticky top-1 mt-10" />
             </ScenarioOverview>
             {/*
@@ -157,12 +157,12 @@ export default function ChatPage() {
             </ChatArea>
             */}
 
-            <div className="ml-60 mr-60 mt-5">
+            <div className="ml-60 mr-60 mt-5 z-40">
                 <h1 className="font-extrabold text-xl mb-5">Scenario: "Who Was Supposed to Send it?"</h1>
                 <p>Joshua and Ryan are working on a team project and have mistaken each others responsibilities. As a result, a deadline was missed.</p>
                 <h2 className="font-extrabold text-xl mt-5">Conversation:</h2>
             </div>
-            <div className=" ml-52 mr-52 p-10 grow-[3] shrink-[1] basis-0 flex flex-col">
+            <div className=" ml-52 mr-52 p-10 grow-[3] shrink-[1] basis-0 flex flex-col z-40">
                 <InView>
                 <div className="flex flex-row" id="Hello"> 
                     <div>
