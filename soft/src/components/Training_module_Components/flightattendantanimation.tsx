@@ -1,15 +1,20 @@
 "use client"
 
 import React from 'react';
-import { Player } from '@lordicon/react';
+import dynamic from 'next/dynamic';
 const ICON = require('../../../public/flight_attendant.json');
 
 interface airlineprops {
     animate: boolean;
 }
 
-export default function Flight_attendant({animate}: airlineprops) {    
-  const playerRef = React.useRef<Player>(null);
+export default function Flight_attendant({animate}: airlineprops) {   
+
+    const Player: any = dynamic(
+        () => import('@lordicon/react').then((mod) => mod.Player),
+        { ssr: false }
+    );
+  const playerRef = React.useRef<any>(null);
   const [windowsize, updatewindowsize] = React.useState(window.innerWidth)
   const [size,updatesize] = React.useState(180)
     React.useEffect(() => {
@@ -41,10 +46,15 @@ export default function Flight_attendant({animate}: airlineprops) {
 
     return (
         <div className='h-full w-full'>
-        <Player 
+                  <Player 
             size={size}
-            ref={playerRef} 
             icon={ ICON }
+            ref={(instance: typeof Player) => {
+                if (instance) {
+                  playerRef.current = instance; // Assign ref
+                  playerRef.current.playFromBeginning?.(); // Trigger animation
+                }
+              }}
         />
         </div>
     );

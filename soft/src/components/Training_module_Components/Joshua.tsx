@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react';
-import { Player } from '@lordicon/react';
+import dynamic from 'next/dynamic';
 const ICON = require('../../../public/Joshua.json');
 
 interface airlineprops {
@@ -9,7 +9,11 @@ interface airlineprops {
 }
 
 export default function Joshua({animate}: airlineprops) {    
-  const playerRef = React.useRef<Player>(null);
+    const Player: any = dynamic(
+        () => import('@lordicon/react').then((mod) => mod.Player),
+        { ssr: false }
+      );
+  const playerRef = React.useRef<any>(null);
     React.useEffect(() => {
         playerRef.current?.playFromBeginning();
     }, [])
@@ -17,8 +21,13 @@ export default function Joshua({animate}: airlineprops) {
     return (
         <Player 
             size={200}
-            ref={playerRef} 
             icon={ ICON }
+            ref={(instance: typeof Player) => {
+                if (instance) {
+                  playerRef.current = instance; // Assign ref
+                  playerRef.current.playFromBeginning?.(); // Trigger animation
+                }
+              }}
         />
     );
 }

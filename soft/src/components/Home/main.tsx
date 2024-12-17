@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components"
 import {Typewriter} from "./Type"
 import {ScenarioSection} from "../Training_module_Components/Scenarios"
-import Convo from "../Training_module_Components/convoanimation";
+import dynamic from 'next/dynamic';
 
 const Container = styled.div`
     height: 90vh;
@@ -60,6 +60,9 @@ export type message = BaseMessage | FunctionMessage;
 export function Main() {
 
   const sub_title = React.useRef<HTMLDivElement | null>(null);
+
+// Dynamically import your component with SSR disabled
+const Convo = dynamic(() => import("../Training_module_Components/convoanimation"), { ssr: false });
 
   return (
     <section>
