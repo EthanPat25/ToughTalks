@@ -165,25 +165,60 @@ export default function ChatPage() {
             <div className=" ml-52 mr-52 p-10 grow-[3] shrink-[1] basis-0 flex flex-col">
                 <InView>
                 <div className="flex flex-row" id="Hello"> 
-                    <div><Joshua animate = {true}></Joshua></div>
-                    <div className="">Jamie, did you send the report to the client yesterday?</div>
+                    <div>
+                        <div><Joshua animate = {true}></Joshua></div>
+                        <h2 className="text-center font-semibold">Joshua</h2>
+                    </div>
+                    <div className="pr-72">
+                    <div className="chat chat-start">
+                        <p className="chat-bubble">Jamie, did you send the report to the client yesterday?</p>
+                        </div>
+                    </div>
                 </div>
                 </InView>
                 <div className="flex flex-row-reverse" id="Hello">
+                <div>
                     <div><Ryan animate = {true}></Ryan></div>
-                    <div className="">Jamie, did you send the report to the client yesterday?</div>
+                        <h2 className="text-center font-semibold">Ryan</h2>
+                    </div>
+                    <div className="pl-72">
+                    <div className="chat chat-end">
+                        <p className="chat-bubble">Jamie, did you send the report to the client yesterday?</p>
+                    </div>
+                    </div>
                 </div>
                 <div className="flex flex-row" id="Hello">
+                <div>
                     <div><Joshua animate = {true}></Joshua></div>
-                    <div className="">Jamie, did you send the report to the client yesterday?</div>
+                        <h2 className="text-center font-semibold">Joshua</h2>
+                    </div>
+                    <div className="pr-72">
+                    <div className="chat chat-start">
+                        <p className="chat-bubble">Jamie, did you send the report to the client yesterday?</p>
+                    </div>
+                    </div>
                 </div>
                 <div className="flex flex-row-reverse" id="Hello">
+                <div>
                     <div><Ryan animate = {true}></Ryan></div>
-                    <div className="">Jamie, did you send the report to the client yesterday?</div>
+                        <h2 className="text-center font-semibold">Ryan</h2>
+                    </div>
+                    <div className="pl-72">
+                    <div className="chat chat-end">
+                        <p className="chat-bubble">Jamie, did you send the report to the client yesterday?</p>
+                        </div>
+                    </div>
                 </div>
                 <div className="flex flex-row" id="Hello">
+                <div>
                     <div><Joshua animate = {true}></Joshua></div>
-                    <div className="">Jamie, did you send the report to the client yesterday?</div>
+                        <h2 className="text-center font-semibold">Joshua</h2>
+                    </div>
+                    <div className="pr-72">
+                        <div className="chat chat-start">
+                        <p className="chat-bubble">Jamie, did you send the report to the client yesterday?</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -218,4 +253,3 @@ export default function ChatPage() {
         </Page>
     );
 }
-
