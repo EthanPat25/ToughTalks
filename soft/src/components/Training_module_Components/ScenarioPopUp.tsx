@@ -2,24 +2,16 @@
 
 import React from 'react'
 import { Button } from '../ui/button'
-//import { Carousel, CarouselContent, CarouselItem, CarouselNext } from '@/components/ui/carousel'
-import Flight_attendant from '@/components/Training_module_Components/flightattendantanimation'
-import Retailanimation from '@/components/Training_module_Components/retailanimation'
 import { EmblaCarousel } from '@/components/Training_module_Components/carousel'
+import {SlideInterface} from './Slide'
 import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogPortal,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
 
-const Customerservice = () => {
-
+const ScenarioPopUp = ({slides}: {slides: Array<SlideInterface>}) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -34,13 +26,13 @@ const Customerservice = () => {
                     Close
                   </Button>
               </DialogClose>
-              }> 
+              } slides = {slides}> 
             </EmblaCarousel>
     </DialogContent>
   </Dialog>
   )
 }
 
-export default Customerservice
+export default ScenarioPopUp
 
 

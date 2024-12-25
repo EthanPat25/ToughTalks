@@ -117,6 +117,7 @@ export default function ChatPage() {
             update_button_disabeld(false)
         }
     }
+
     React.useEffect(() => {
         if (msgref.current !== null) {
             msgref.current.scrollIntoView(true)

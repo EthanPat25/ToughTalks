@@ -36,10 +36,10 @@ export default function Flight_attendant({animate}: airlineprops) {
     },[])
 
     React.useEffect(() => {
-        if (windowsize > 640) {
+        if (windowsize > 768) {
             updatesize(400)
         } 
-        else if (windowsize <= 640) {
+        else if (windowsize <= 768) {
             updatesize(250)
         } 
     },[windowsize])

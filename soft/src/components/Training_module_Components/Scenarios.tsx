@@ -2,16 +2,15 @@
 
 import React from "react";
 import styled from "styled-components";
-import { gsap } from "gsap";
 import { motion } from "framer-motion";
 import { WobbleCard } from "../ui/wobble-card";
-import { Headset } from 'lucide-react';
-import { Speech } from 'lucide-react';
-import { Handshake } from 'lucide-react';
-import Customerservice from "../Training_module_Components/customerservicepopup";
+import ScenarioPopUp from "./ScenarioPopUp";
 import Customer from "./Customer";
 import ConflictResolution from "./ConflictResolution";
-
+import Flight_attendant from '@/components/Training_module_Components/flightattendantanimation'
+import Retailanimation from '@/components/Training_module_Components/retailanimation'
+import TechSupport from './TechSupport'
+import Conflict from "./Conflict";
 
 const ScenarioCards = styled.div`
   height: 50vh;
@@ -37,8 +36,45 @@ const ScenarioEnd = styled.div`
   justify-content: center;
 `
 
-interface childprops {
-}
+const CustomerServiceSlides = [
+    {
+      title: "Airline Scenario",
+      index: 0,
+      AnimationComponent: Flight_attendant,
+      inView: false,
+      link: "/chat",
+      buttonColor: "rgb(145,20,12)"
+    },
+    {
+      title: "Retail Scenario",
+      index: 1,
+      AnimationComponent: Retailanimation,
+      inView: false,
+      link: "/chat",
+      buttonColor: "rgb(255,146,72)"
+    },
+    {
+      title: "Tech Support Scenario",
+      index: 2,
+      AnimationComponent: TechSupport,
+      inView: false,
+      link: "/chat",
+      buttonColor: "rgb(17,10,92)"
+    }
+  ]
+
+
+const ConflictResolutionSlides = [
+  {
+    title: "WorkPlace Misunderstandings",
+    index: 0,
+    AnimationComponent: Conflict,
+    inView: false,
+    link: "/chat",
+    buttonColor: "rgb(145,20,12)"
+  },
+]
+
 
 export const ScenarioSection = React.forwardRef<HTMLDivElement | null>(({}, ref) => {
 
@@ -85,7 +121,7 @@ export const ScenarioSection = React.forwardRef<HTMLDivElement | null>(({}, ref)
             </div>
             <div className="flex justify-center mt-8">
 
-            <Customerservice></Customerservice>
+            <ScenarioPopUp slides = {CustomerServiceSlides}></ScenarioPopUp>
         
             </div>
         </WobbleCard>
@@ -104,9 +140,7 @@ export const ScenarioSection = React.forwardRef<HTMLDivElement | null>(({}, ref)
               </p>
           </div>
           <div className="flex justify-center mt-7">
-            <button className="px-6 py-2 bg-[rgb(58,80,244)] text-white rounded-lg font-bold transform hover:-translate-y-1 transition duration-400">
-              Start Training Now
-            </button>
+          <ScenarioPopUp slides = {ConflictResolutionSlides}></ScenarioPopUp>
           </div>
         </WobbleCard>
       </div>
