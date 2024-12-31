@@ -25,6 +25,7 @@
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.2.0",
     "firebase": "^10.11.0",
+    "flubber": "^0.4.2",
     "framer-motion": "^11.3.30",
     "gsap": "^3.12.5",
     "lottie-web": "^5.12.2",
@@ -43,6 +44,7 @@
     "three": "^0.163.0"
   },
   "devDependencies": {
+    "@types/flubber": "^0.4.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

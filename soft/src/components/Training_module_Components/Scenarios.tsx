@@ -11,6 +11,7 @@ import Flight_attendant from '@/components/Training_module_Components/flightatte
 import Retailanimation from '@/components/Training_module_Components/retailanimation'
 import TechSupport from './TechSupport'
 import Conflict from "./Conflict";
+import { WordPullUp } from "../ui/wordPullUp";
 
 const ScenarioCards = styled.div`
   height: 50vh;
@@ -74,7 +75,7 @@ const ConflictResolutionSlides = [
     buttonColor: "rgb(145,20,12)"
   },
 ]
-
+ 
 
 export const ScenarioSection = React.forwardRef<HTMLDivElement | null>(({}, ref) => {
 
@@ -82,6 +83,8 @@ export const ScenarioSection = React.forwardRef<HTMLDivElement | null>(({}, ref)
     <Container className="flex flex-col">
       <ScenarioIntro className="flex-grow-1">
         <div ref={ref} style={{width: "50%", display: "flex", flexDirection: "column", alignItems: "start", justifyContent: "center"}}>
+        <WordPullUp> The Journey Begins</WordPullUp>
+        { /*
           <motion.h4 
           style = {{fontWeight: "600", color: "#583fbc", fontSize: "14px"}}
            initial = {{ opacity: 0.4, scale: 0.5}}
@@ -89,6 +92,8 @@ export const ScenarioSection = React.forwardRef<HTMLDivElement | null>(({}, ref)
            transition={{duration: 1}}>
             The Journey Begins
             </motion.h4>
+            */
+            }
           <motion.h1 
           style={{fontWeight: "700", color: "#181945", fontSize: "48px"}}
           initial={{ opacity: 0.4, scale: 0.5 }}
@@ -121,7 +126,7 @@ export const ScenarioSection = React.forwardRef<HTMLDivElement | null>(({}, ref)
             </div>
             <div className="flex justify-center mt-8">
 
-            <ScenarioPopUp slides = {CustomerServiceSlides}></ScenarioPopUp>
+            <ScenarioPopUp slides = {CustomerServiceSlides} className = {"px-6 py-2 bg-[rgb(58,80,244)] text-white rounded-lg font-bold transform hover:-translate-y-1 transition duration-400"} text = {"Start Training Now"}></ScenarioPopUp>
         
             </div>
         </WobbleCard>
@@ -140,7 +145,7 @@ export const ScenarioSection = React.forwardRef<HTMLDivElement | null>(({}, ref)
               </p>
           </div>
           <div className="flex justify-center mt-7">
-          <ScenarioPopUp slides = {ConflictResolutionSlides}></ScenarioPopUp>
+          <ScenarioPopUp slides = {ConflictResolutionSlides} className = {"px-6 py-2 bg-[rgb(58,80,244)] text-white rounded-lg font-bold transform hover:-translate-y-1 transition duration-400"} text = {"Start Training Now"}></ScenarioPopUp>
           </div>
         </WobbleCard>
       </div>

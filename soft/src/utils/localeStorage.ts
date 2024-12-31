@@ -1,5 +1,5 @@
-import { message } from "../components/main";
-
+//import { message } from "../;
+/*
 export const get_message_array = () => {
     let Conv_hist: string | null
     Conv_hist = localStorage.getItem("ConversationHistory")
@@ -9,3 +9,4 @@ export const get_message_array = () => {
         return [] as Array<message>;
     }
 }
+    */

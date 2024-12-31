@@ -3,6 +3,9 @@ import styled from "styled-components"
 import {Typewriter} from "./Type"
 import {ScenarioSection} from "../Training_module_Components/Scenarios"
 import dynamic from 'next/dynamic';
+import ScenarioPopUp from '../Training_module_Components/ScenarioPopUp'
+import Conflict from "../Training_module_Components/Conflict";
+
 
 const Container = styled.div`
     height: 90vh;
@@ -54,6 +57,17 @@ interface FunctionMessage {
   name: string;
 }
 
+const ConflictResolutionSlides = [
+  {
+    title: "WorkPlace Misunderstandings",
+    index: 0,
+    AnimationComponent: Conflict,
+    inView: false,
+    link: "/chat",
+    buttonColor: "rgb(145,20,12)"
+  },
+]
+
 export type message = BaseMessage | FunctionMessage;
 
 
@@ -82,10 +96,8 @@ const Convo = dynamic(() => import("../Training_module_Components/convoanimation
               </p>
             </div>
              <div className=" flex flex-1 justify-around w-full">
-             <button onClick={() => {sub_title.current?.scrollIntoView({behavior: "smooth"})}} className="px-8 py-2 lg:w-52 lg:h-14 bg-[rgb(123,97,355)] text-white text-sm rounded-lg font-semibold hover:bg-[rgb(123,97,355)]/[0.8] hover:shadow-lg">
-             Try Now
-            </button>     
-            <button className="px-8 py-2 lg:w-52 lg:h-14 bg-[rgb(74,144,226)] text-white text-sm rounded-lg font-semibold hover:bg-[rgb(74,144,226)]/[0.8] hover:shadow-lg mr-16">
+             <ScenarioPopUp slides = {ConflictResolutionSlides} className = {"px-8 py-2 lg:w-52 lg:h-14 bg-[rgb(123,97,355)] text-white text-sm rounded-lg font-semibold hover:bg-[rgb(123,97,355)]/[0.8] hover:shadow-lg"} text = {"Try Now"}></ScenarioPopUp>   
+            <button onClick={() => {sub_title.current?.scrollIntoView({behavior: "smooth"})}} className="px-8 py-2 lg:w-52 lg:h-14 bg-[rgb(74,144,226)] text-white text-sm rounded-lg font-semibold hover:bg-[rgb(74,144,226)]/[0.8] hover:shadow-lg mr-16">
             Learn More
             </button>           
               </div>

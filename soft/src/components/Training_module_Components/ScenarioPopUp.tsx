@@ -8,15 +8,23 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
 
-const ScenarioPopUp = ({slides}: {slides: Array<SlideInterface>}) => {
+interface ScenarioPopUpProps {
+  slides: Array<SlideInterface>;
+  className: string;
+  text: string;
+}
+
+const ScenarioPopUp = ({slides, className, text}: ScenarioPopUpProps) => {
   return (
     <Dialog>
+      <DialogTitle className='hidden'>Training Module Selection: {text}</DialogTitle>
       <DialogTrigger asChild>
-        <button className="px-6 py-2 bg-[rgb(58,80,244)] text-white rounded-lg font-bold transform hover:-translate-y-1 transition duration-400">
-          Start Training Now
+        <button className={className}>
+          {text}
         </button>
       </DialogTrigger>
       <DialogContent className='h-3/5 w-[80%] sm:h-4/5 sm:w-[60%] rounded-3xl'>
@@ -32,6 +40,7 @@ const ScenarioPopUp = ({slides}: {slides: Array<SlideInterface>}) => {
   </Dialog>
   )
 }
+
 
 export default ScenarioPopUp
 

@@ -11,6 +11,8 @@ import { Progress } from "../../components/ui/ProgressBar"
 import Ryan from "@/components/Training_module_Components/Ryan";
 import { InView } from 'react-intersection-observer';
 import { motion, useScroll, useSpring, useTransform} from "motion/react";
+import { usePathname, useSearchParams } from 'next/navigation';
+import Loading from "./loadingAnimation";
 
 
 localStorage.setItem("ConversationStatus", "closed");
@@ -42,6 +44,7 @@ const ScenarioArea = styled.div`
 `
 
 export default function ChatPage() {
+    const pathname = usePathname()
     const msgref = useRef<HTMLDivElement | null>(null);
     const [button_disabled, update_button_disabeld] = React.useState(false);
     const [UserInput, updateUserInput] = React.useState('');
@@ -75,11 +78,6 @@ export default function ChatPage() {
         messages_array.push(scenario)
         return messages_array as Array<message>
     });
-
-
-    const user_Input_Change = (event: any) => {
-        updateUserInput(event.target.value)
-    }
 
     const Click =  async () => {
         update_button_disabeld(true)
@@ -184,7 +182,7 @@ export default function ChatPage() {
                     </div>
                     <div className=" md:pl-10 xl:pl-72">
                     <div className="chat chat-end">
-                        <p className="chat-bubble">Jamie, did you send the report to the client yesterday?</p>
+                        <p className="chat-bubble">Wait, I thought you were sending it. You’ve always been the one who handles submissions!</p>
                     </div>
                     </div>
                 </div>
@@ -195,7 +193,7 @@ export default function ChatPage() {
                     </div>
                     <div className="xl:pr-72">
                     <div className="chat chat-start">
-                        <p className="chat-bubble">Jamie, did you send the report to the client yesterday?</p>
+                        <p className="chat-bubble">That’s true, but you were finishing the draft last week, so I assumed you’d send it this time.</p>
                     </div>
                     </div>
                 </div>
@@ -206,7 +204,7 @@ export default function ChatPage() {
                     </div>
                     <div className="xl:pl-72">
                     <div className="chat chat-end">
-                        <p className="chat-bubble">Jamie, did you send the report to the client yesterday?</p>
+                        <p className="chat-bubble">Well, if I knew you weren’t planning to send it, I would’ve done it myself. Why didn’t you check with me?</p>
                         </div>
                     </div>
                 </div>
@@ -217,7 +215,7 @@ export default function ChatPage() {
                     </div>
                     <div className="xl:pr-72">
                         <div className="chat chat-start">
-                        <p className="chat-bubble">Jamie, did you send the report to the client yesterday?</p>
+                        <p className="chat-bubble">Why didn’t you check with me? I thought we were on the same page.</p>
                         </div>
                     </div>
                 </div>
@@ -230,22 +228,12 @@ export default function ChatPage() {
                 <p className="text-center">It Seems theres been a mistunderstanding between Joshua and Ryan. which has created the risk of workplace Conflict. Answer the following questions to help Joshua and Ryan resolve the issue and move forward:</p>
             </div>
                 <FlipText
-                    className="text-md text-black dark:text-white font-bold"
-                    word="What Was The Miscommunication?"
-                />
-                <ChatInput className={`${chatvisibility} flex items-center justify-center mt-3`}>
-                <div className="flex w-full max-w-sm items-center space-x-2">
-                    <Input type="email" placeholder="Type Your Response"  onChange={user_Input_Change}/>
-                    <Button disabled = {button_disabled}  onClick={Click} type="submit" variant="outline">Check</Button>
-                </div>
-                </ChatInput>
-                <FlipText
                     className="text-md text-black dark:text-white mt-8 font-bold"
                     word="How can Joshua and Ryan resolve this misunderstanding?"
                 />
                 <ChatInput className={`${chatvisibility} flex items-center justify-center mt-3`}>
                 <div className="flex w-full max-w-sm items-center space-x-2">
-                    <Input type="email" placeholder="Type Your Response"  onChange={user_Input_Change}/>
+                    <Input type="email" placeholder="Type Your Response"/>
                     <Button className = "rounded-xl" disabled = {button_disabled}  onClick={Click} type="submit" variant="outline">Check</Button>
                 </div>
                 </ChatInput>
