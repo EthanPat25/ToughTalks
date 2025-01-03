@@ -5,11 +5,13 @@ import {
   Dialog,
   DialogContent,
   DialogTrigger,
+  DialogTitle
 } from "@/components/ui/dialog"
 
 const ExplainerPopUp = () => {
   return (
     <Dialog>
+      <DialogTitle className='hidden'>ExplainerPopUp</DialogTitle>
       <DialogTrigger asChild>
       </DialogTrigger>
       <DialogContent className='h-3/5 w-[80%] sm:h-4/5 sm:w-[60%] rounded-3xl'>

@@ -20,7 +20,7 @@ interface ScenarioPopUpProps {
 
 const ScenarioPopUp = ({slides, className, text}: ScenarioPopUpProps) => {
   return (
-    <Dialog>
+    <Dialog modal = {true}>
       <DialogTitle className='hidden'>Training Module Selection: {text}</DialogTitle>
       <DialogTrigger asChild>
         <button className={className}>

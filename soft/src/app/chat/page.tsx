@@ -3,7 +3,7 @@ import React, { useRef } from "react"
 import styled from "styled-components"
 import  ChatBox  from "../../components/Chat_Components/chatbox";
 import { message } from "../../components/Home/main";
-import { Input }  from "../../components/ui/textinput"
+import { Textarea }  from "../../components/ui/TextArea"
 import { Button } from "../../components/ui/button"
 import { FlipText } from "../../components/ui/flip_textEffect";
 import Joshua from "@/components/Training_module_Components/Joshua";
@@ -12,8 +12,9 @@ import Ryan from "@/components/Training_module_Components/Ryan";
 import { InView } from 'react-intersection-observer';
 import { motion, useScroll, useSpring, useTransform} from "motion/react";
 import { usePathname, useSearchParams } from 'next/navigation';
-import Loading from "./loadingAnimation";
-
+import { useForm, SubmitHandler } from "react-hook-form"
+import FeedBack from "./FeedBack";
+import {openAiStructuretype} from "../../utils/openai"
 
 localStorage.setItem("ConversationStatus", "closed");
 localStorage.clear();
@@ -43,7 +44,12 @@ const ScenarioArea = styled.div`
 
 `
 
+type Input = {
+    Answer: string
+}
+
 export default function ChatPage() {
+
     const pathname = usePathname()
     const msgref = useRef<HTMLDivElement | null>(null);
     const [button_disabled, update_button_disabeld] = React.useState(false);
@@ -52,6 +58,13 @@ export default function ChatPage() {
     const [toggleTwo, updatetoggleTwo] = React.useState<string | null>(null)
     const [chatvisibility, updatechatvisibility] = React.useState<string | null>(null)
     const [scenariovisibility, updatescenariovisibility] = React.useState<string | null>('hidden');
+    const [feedBackResponse, updateFeedBackResponse] = React.useState<openAiStructuretype>(({
+        feedBack: '',
+        score: 0,
+        satisfactoryCompletion: false
+      }));
+    const [feedBackDialogState, updateFeedBackDialogState] = React.useState<boolean>(false);
+
     const pageRef = useRef(null);
     const { scrollYProgress } = useScroll({
         container: pageRef});
@@ -62,22 +75,73 @@ export default function ChatPage() {
         restDelta: 0.001
       })
 
+      const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+      } = useForm<Input>()
+      const onSubmit: SubmitHandler<Input> = (data) => console.log(data)
+
     const [conversation_History, update_Conversation_History] = React.useState(() => {
         let messages_array: Array<message> = [];
         let scenario: message = {
             role: "system",
-            content: `Let’s role-play a phone call. You are a manager, and your employee, sonia, who is an occupational therapist, has been with the company for 2 months. 
-                They are requesting a reference for a new job. Please ensure that you consider their job as an occupational therapist when responding, taking into account any specific responsibilities or impact this role may have. 
-                Reflect on how this might influence your frustration or concern as a manager.
-                Instructions: Speak naturally and conversationally, reflecting your frustration and the employee’s need for a reference. Use casual, everyday language. 
-                For the response, try something like: 
-                'Hey rachel, I just heard you’re asking for a reference. 
-                Can you tell me why you’re looking to leave so soon? 
-                You have't been here very long."`
+            content: `
+
+            You are tasked with providing concise, simple, and constructive feedback to the user's answer. 
+The context is workplace conflict resolution. At the end of your feedback, you will assign:
+1. A score out of 10 for the user's response.
+2. A Boolean field indicating whether the attempt was satisfactory (true) or unsatisfactory (false).
+
+The Boolean field is determined as follows:
+- If the user's response makes a reasonable attempt to address the scenario and provides relevant suggestions for resolving workplace conflict, mark it as "true."
+- If the response is unrelated or fails to address the scenario constructively, mark it as "false."
+
+### Scoring Guidelines:
+- **0 points**: Completely unrelated or nonsensical responses (e.g., "Can you give me a pizza recipe?").
+- **1-3 points**: Responses that are provocative, unhelpful, or assign undue blame without suggesting constructive solutions.
+- **4-6 points**: Responses that provide minimal or vague suggestions, focus on the problem instead of solutions, or assign blame while making a minor effort to address the conflict.
+- **7-8 points**: Responses that emphasize cooperation, shared responsibility, and practical solutions but may lack depth or fail to address long-term prevention.
+- **9-10 points**: Exemplary responses that focus on immediate problem resolution, suggest cooperation and delegation of responsibilities, avoid assigning blame, and include a forward-looking strategy to prevent similar issues.
+
+### Key Principles to Emphasize:
+- Avoid assigning blame in the immediate situation. Focus on solutions instead.
+- Encourage cooperation and shared responsibility.
+- Suggest actionable steps, such as a meeting to clarify roles and responsibilities.
+- Highlight the importance of moving quickly to resolve the current issue rather than dwelling on the mistake.
+- Acknowledge that, at a later date, a discussion on how to prevent similar misunderstandings is valuable.
+- Encourage both parties to accept partial responsibility to maintain a collaborative tone.
+
+### Scenario Context:
+Joshua and Ryan missed a project deadline due to a misunderstanding about responsibilities. The discussion revolves around resolving this conflict effectively.
+
+**Scenario**: 
+"Who Was Supposed to Send it?"
+Joshua and Ryan are working on a team project and have mistaken each others' responsibilities. As a result, a deadline was missed.
+- Joshua: Ryan, did you send the report to the client yesterday?
+- Ryan: Wait, I thought you were sending it. You’ve always been the one who handles submissions!
+- Joshua: That’s true, but you were finishing the draft last week, so I assumed you’d send it this time.
+- Ryan: Well, if I knew you weren’t planning to send it, I would’ve done it myself. Why didn’t you check with me?
+- Joshua: Why didn’t you check with me? I thought we were on the same page.
+
+**User's Answer**:
+The user's response will be provided to you. If the user's answer is unrelated to resolving this conflict, assign a score of 0, mark "Satisfactory Completion" as false, and give feedback stating, "Your response was unrelated to the question. Please provide an answer relevant to resolving workplace conflict."
+
+### Format Requirements:
+Always structure your response in the following strict JSON format:
+1. **Feedback:** Provide clear, constructive feedback. This field must ONLY contain feedback text and must NOT include the "score" or "satisfactoryCompletion" values.
+2. **Score:** Provide a numerical score out of 10. This field must remain separate and must NOT be referenced or repeated in the "feedback" field.
+3. **Satisfactory Completion:** Return a Boolean value, "true" for a satisfactory attempt or "false" for an unsatisfactory attempt. This field must remain separate and must NOT be referenced or repeated in the "feedback" field.
+
+**All three fields (Feedback, Score, Satisfactory Completion) must always be filled and strictly follow the format to allow consistent parsing.**
+          `
         }
         messages_array.push(scenario)
         return messages_array as Array<message>
     });
+
+    /*
 
     const Click =  async () => {
         update_button_disabeld(true)
@@ -116,12 +180,53 @@ export default function ChatPage() {
         }
     }
 
+*/
+
+    const ApiRequest = async (data: Input) => {
+
+        let userAnswer: message  = {
+            role: "user",
+            content: data.Answer
+        }
+
+        let message_array: Array<message> = [...conversation_History];
+        message_array.push(userAnswer);
+
+
+        message_array.forEach((element) => {
+            console.log("Array ellement" + element.content);
+        })
+
+        try {
+            console.log("Data: " + data.Answer);
+            const response = await fetch('/api/openai', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json', // Ensure JSON content type
+              },
+              body: JSON.stringify(message_array)
+            });
+
+            const responseData: openAiStructuretype = await response.json();
+            updateFeedBackResponse(responseData)
+            updateFeedBackDialogState(true);
+        } catch {
+            console.log("await error");
+        } finally {
+            update_button_disabeld(false);
+        }
+    }
+
+    /*
+
     React.useEffect(() => {
         if (msgref.current !== null) {
             msgref.current.scrollIntoView(true)
         }
 
     }, [conversation_History])
+
+    */
 
     const toggle = (toggle: number) => {
         if (toggle === 1 && toggleTwo !== null) {
@@ -156,65 +261,87 @@ export default function ChatPage() {
             </ChatArea>
             */}
 
-            <div className=" md:ml-10 xl:ml-60 xl:mr-60 xl:mt-5 z-40">
+            <div className="lg:ml-32 lg:mr-32 xl:ml-60 xl:mr-60 lg:mt-5 z-40 2xl:mr-96 2xl:ml-96">
                 <h1 className="font-extrabold text-xl mb-5">Scenario: "Who Was Supposed to Send it?"</h1>
                 <p>Joshua and Ryan are working on a team project and have mistaken each others responsibilities. As a result, a deadline was missed.</p>
                 <h2 className="font-extrabold text-xl mt-5">Conversation:</h2>
             </div>
-            <div className=" md:ml-10 xl:ml-52 xl:mr-52 p-10 grow-[3] shrink-[1] basis-0 flex flex-col z-40">
+            <div className=" lg:ml-32 lg:mr-32 xl:ml-52 xl:mr-52 2xl:mr-96 2xl:ml-96 p-10 grow-[3] shrink-[1] basis-0 flex flex-col z-40">
+
                 <InView>
-                <div className="flex flex-row" id="Hello"> 
-                    <div>
-                        <div><Joshua animate = {true}></Joshua></div>
-                        <h2 className="text-center font-semibold">Joshua</h2>
+                    <div className="flex flex-row" id="Hello"> 
+                        <div className="relative">
+                            <div>
+                                <Joshua animate = {true}></Joshua>
+                            </div>
+                            <h2 className="text-center font-semibold">Joshua</h2>
+                        </div>
+
+                        <div>
+                            <div className="relative lg:right-8 lg:bottom-7 chat chat-start lg:pr-40 xl:pr-60">
+                                <p className="chat-bubble">Ryan, did you send the report to the client yesterday?</p>
+                            </div>
+                        </div>
                     </div>
-                    <div className="xl:pr-72">
-                    <div className="chat chat-start">
-                        <p className="chat-bubble">Jamie, did you send the report to the client yesterday?</p>
+                </InView>
+                
+                <div className="flex flex-row-reverse" id="Hello">
+                    <div className="relative">
+                        <div>
+                            <Ryan animate = {true}></Ryan>
+                        </div>
+                        <h2 className="text-center font-semibold">
+                            Ryan
+                        </h2>
+                    </div>
+                    <div>
+                        <div className="relative lg:left-8 bottom-7 chat chat-end lg:pl-40 xl:pl-60">
+                            <p className="chat-bubble">Wait, I thought you were sending it. You’ve always been the one who handles submissions!</p>
                         </div>
                     </div>
                 </div>
-                </InView>
-                <div className="flex flex-row-reverse" id="Hello">
-                <div>
-                    <div><Ryan animate = {true}></Ryan></div>
-                        <h2 className="text-center font-semibold">Ryan</h2>
-                    </div>
-                    <div className=" md:pl-10 xl:pl-72">
-                    <div className="chat chat-end">
-                        <p className="chat-bubble">Wait, I thought you were sending it. You’ve always been the one who handles submissions!</p>
-                    </div>
-                    </div>
-                </div>
+
                 <div className="flex flex-row" id="Hello">
-                <div>
-                    <div><Joshua animate = {true}></Joshua></div>
-                        <h2 className="text-center font-semibold">Joshua</h2>
+                    <div className="relative">
+                        <div>
+                            <Joshua animate = {true}></Joshua>
+                        </div>
+                            <h2 className="text-center font-semibold">
+                                Joshua
+                            </h2>
                     </div>
-                    <div className="xl:pr-72">
-                    <div className="chat chat-start">
-                        <p className="chat-bubble">That’s true, but you were finishing the draft last week, so I assumed you’d send it this time.</p>
-                    </div>
+                    <div>
+                        <div className="relative lg:right-8 lg:bottom-7 chat chat-start lg:pr-40 xl:pr-60">
+                            <p className="chat-bubble">That’s true, but you were finishing the draft last week, so I assumed you’d send it this time.</p>
+                        </div>
                     </div>
                 </div>
+
                 <div className="flex flex-row-reverse" id="Hello">
-                <div>
-                    <div><Ryan animate = {true}></Ryan></div>
-                        <h2 className="text-center font-semibold">Ryan</h2>
-                    </div>
-                    <div className="xl:pl-72">
-                    <div className="chat chat-end">
+                    <div>
+                        <div>
+                            <Ryan animate = {true}></Ryan>
+                        </div>
+                            <h2 className="text-center font-semibold">
+                                Ryan
+                            </h2>
+                        </div>
+                    <div>
+                    <div className="relative lg:left-8 bottom-7 chat chat-end lg:pl-40 xl:pl-60">
                         <p className="chat-bubble">Well, if I knew you weren’t planning to send it, I would’ve done it myself. Why didn’t you check with me?</p>
                         </div>
                     </div>
                 </div>
+
                 <div className="flex flex-row" id="Hello">
                 <div>
-                    <div><Joshua animate = {true}></Joshua></div>
+                    <div>
+                        <Joshua animate = {true}></Joshua>
+                    </div>
                         <h2 className="text-center font-semibold">Joshua</h2>
                     </div>
-                    <div className="xl:pr-72">
-                        <div className="chat chat-start">
+                    <div>
+                        <div className="chat chat-start relative lg:right-8 lg:bottom-7 lg:pr-40 xl:pr-60">
                         <p className="chat-bubble">Why didn’t you check with me? I thought we were on the same page.</p>
                         </div>
                     </div>
@@ -222,23 +349,27 @@ export default function ChatPage() {
             </div>
 
             <div className="w-full flex justify-center items-center grow-[2] shrink-[1] basis-0">
-            <div className="bg-[rgb(248,248,248)] w-1/2 h-3/4 rounded-lg shadow-inner flex-row p-3 mb-20 mt-20">
+            <div className="bg-[rgb(248,248,248)] w-1/2 h-3/4 rounded-lg shadow-inner flex-row p-3 mb-20 mt-20 lg:p-5">
             <div className="flex flex-col items-center justify-center mb-5">
-                <h1 className="font-bold">Your Answer</h1>
-                <p className="text-center">It Seems theres been a mistunderstanding between Joshua and Ryan. which has created the risk of workplace Conflict. Answer the following questions to help Joshua and Ryan resolve the issue and move forward:</p>
+                <h1 className="font-bold">Resolve the Conflict</h1>
+                <p className="text-justify mt-3 tracking-tighter">It Seems theres been a mistunderstanding between Joshua and Ryan. which has created the risk of workplace Conflict. Answer the following questions to help Joshua and Ryan resolve the issue and move forward:</p>
             </div>
-                <FlipText
-                    className="text-md text-black dark:text-white mt-8 font-bold"
-                    word="How can Joshua and Ryan resolve this misunderstanding?"
-                />
-                <ChatInput className={`${chatvisibility} flex items-center justify-center mt-3`}>
-                <div className="flex w-full max-w-sm items-center space-x-2">
-                    <Input type="email" placeholder="Type Your Response"/>
-                    <Button className = "rounded-xl" disabled = {button_disabled}  onClick={Click} type="submit" variant="outline">Check</Button>
-                </div>
+            <div className="flex flex-row justify-center mb-3 mt-14">
+                <h1 className="font-bold tracking-tighter text-center">How Can Joshua and Ryan Resolve This Misunderstanding?</h1>
+            </div>
+
+                <form onSubmit={handleSubmit(ApiRequest)}>
+                <ChatInput className={`${chatvisibility} flex-col flex items-center justify-center`}>
+                    <div className="grid w-full gap-2">
+                        <Textarea {...register('Answer')} placeholder="Type Your Response" className="resize-none rounded-lg"/>
+                        <Button className="mt-3 bg-[rgb(74,144,226)]">Check</Button>
+                    </div>
                 </ChatInput>
+                </form>
             </div>
             </div>
+
+            <FeedBack response = {feedBackResponse} state = {feedBackDialogState} ></FeedBack>
         </Page>
     );
 }

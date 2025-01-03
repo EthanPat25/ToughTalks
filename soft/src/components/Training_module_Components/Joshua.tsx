@@ -8,7 +8,9 @@ interface airlineprops {
     animate: boolean;
 }
 
-export default function Joshua({animate}: airlineprops) {    
+export default function Joshua({animate}: airlineprops) {   
+    const [windowsize, updatewindowsize] = React.useState(window.innerWidth)
+    const [size,updatesize] = React.useState(200) 
     const Player: any = dynamic(
         () => import('@lordicon/react').then((mod) => mod.Player),
         { ssr: false }
@@ -18,16 +20,45 @@ export default function Joshua({animate}: airlineprops) {
         playerRef.current?.playFromBeginning();
     }, [])
 
+    const resize = () => {
+        updatewindowsize(window.innerWidth);
+    }
+
+        React.useEffect(() => {
+            window.addEventListener('resize', resize)
+            return () => (
+                window.removeEventListener('resize', resize)
+            );
+    
+        },[])
+    
+        React.useEffect(() => {
+            if (windowsize >= 3200) {
+                updatesize(450)
+
+            } else if (windowsize >= 2560) {
+                updatesize(350)
+
+            } else if (windowsize >= 1920) {
+                updatesize(300)
+            }
+            else if (windowsize >= 1536) {
+                updatesize(250)
+            } 
+            else if (windowsize <= 1024) {
+                updatesize(170)
+            } 
+        },[windowsize])
+
     return (
-        <Player 
-            size={200}
-            icon={ ICON }
-            ref={(instance: typeof Player) => {
+
+
+    <Player size={size} icon={ICON} ref={(instance: typeof Player) => {
                 if (instance) {
                   playerRef.current = instance; // Assign ref
                   playerRef.current.playFromBeginning?.(); // Trigger animation
                 }
-              }}
-        />
+              }} />
+
     );
 }

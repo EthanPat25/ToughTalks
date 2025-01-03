@@ -1,22 +1,33 @@
 import { message } from "../components/Home/main";
 import OpenAI from "openai";
+import { z } from "zod";
+import { zodResponseFormat } from "openai/helpers/zod";
 
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY
-});
+const openai = new OpenAI();
 
-export const SendMessage =  async (data: Array<message>): Promise<string | null> => {
+interface openAiStructuretype {
+    feedBack: string,
+    score: number,
+    satisfactoryCompletion: boolean
+}
+
+const openAiStructure = z.object({
+    feedBack: z.string(),
+    score: z.number(),
+    satisfactoryCompletion: z.boolean()
+  });
+
+export const SendMessage =  async (data: Array<message>): Promise<openAiStructuretype | null> => {
     try {
-        console.log(data);
-
         const completion = await openai.chat.completions.create({
-            messages: data,
             model: "gpt-4o",
+            messages: data,
+            response_format: zodResponseFormat(openAiStructure, "Structure"),
         });
-        console.log(completion);
-        // Add Logic for when openai returns back not a string
-        return completion.choices[0].message.content;
+            // Add Logic for when openai returns back not a string
+        return JSON.parse(completion.choices[0].message.content as string);
     } catch (error) {
+        console.log(error);
         console.log("Await operation failed");
         throw error; 
     }
