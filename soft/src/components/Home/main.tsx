@@ -28,21 +28,11 @@ const Blueframe = styled.div`
 
 const InfoGraphic = styled.div`
   height: 100%;
-  width: 50%;
-  background-color: #dbeffa;
-  border-top-right-radius: 60px;
-  border-bottom-right-radius: 60px;
 `
 
 
 const StartNow = styled.div`
   height: 100%;
-  width: 50%;
-  background-color: #dbeffa;
-  padding: 10%;
-  padding-right: 0;
-  border-top-left-radius: 60px;
-  border-bottom-left-radius: 60px;
 `
 
 
@@ -81,13 +71,13 @@ const Convo = dynamic(() => import("../Training_module_Components/convoanimation
   return (
     <section>
     <Container>
-       <Blueframe>
-          <StartNow id="startnow" className = "flex flex-col items-start">
+       <Blueframe className="xs:portrait:flex-col">
+          <StartNow id="startnow" className = "flex flex-col items-start xs:portrait:w-full xs:portrait:pr-[10%] xs:w-1/2 xs:p-[10%] xs:pr-0">
             <div className="grow-[0.5] shrink-[1]">
               <Typewriter></Typewriter>
             </div>
             <div className="grow-[2]">
-              <p className = "xs:hidden md:block text-xl text-pretty" style={{color: "#181945", marginTop: "30px", marginBottom: "25px"}}>
+              <p className = "xs:hidden lg:block text-xl text-pretty" style={{color: "#181945", marginTop: "30px", marginBottom: "25px"}}>
                 Master difficult conversations with ease.
                 Whether you're negotiating a raise, addressing 
                 an unhappy client, or learning to assert yourself, 
@@ -95,17 +85,22 @@ const Convo = dynamic(() => import("../Training_module_Components/convoanimation
                 across unqiue scenarios. Navigate your professional challenges confidently with ToughTalks.
               </p>
             </div>
-             <div className=" flex flex-1 justify-around w-full">
-             <ScenarioPopUp slides = {ConflictResolutionSlides} className = {"px-8 py-2 lg:w-52 lg:h-14 bg-[rgb(123,97,355)] text-white text-sm rounded-lg font-semibold hover:bg-[rgb(123,97,355)]/[0.8] hover:shadow-lg"} text = {"Try Now"}></ScenarioPopUp>   
-            <button onClick={() => {sub_title.current?.scrollIntoView({behavior: "smooth"})}} className="px-8 py-2 lg:w-52 lg:h-14 bg-[rgb(74,144,226)] text-white text-sm rounded-lg font-semibold hover:bg-[rgb(74,144,226)]/[0.8] hover:shadow-lg mr-16">
+             <div className="flex flex-1 justify-around w-full">
+             <ScenarioPopUp slides = {ConflictResolutionSlides} className = {"xs:portrait:hidden px-8 py-2 lg:w-52 lg:h-14 bg-[rgb(123,97,355)] text-white text-sm rounded-lg font-semibold hover:bg-[rgb(123,97,355)]/[0.8] hover:shadow-lg"} text = {"Try Now"}></ScenarioPopUp>   
+            <button onClick={() => {sub_title.current?.scrollIntoView({behavior: "smooth"})}} className="xs:portrait:hidden px-8 py-2 lg:w-52 lg:h-14 bg-[rgb(74,144,226)] text-white text-sm rounded-lg font-semibold hover:bg-[rgb(74,144,226)]/[0.8] hover:shadow-lg mr-16">
             Learn More
             </button>           
               </div>
           </StartNow>
-          <InfoGraphic className="flex justify-center items-center">
+          <InfoGraphic className="flex w-1/2 xs:portrait:w-full xs:portrait:flex-col justify-center items-center">
             <Convo></Convo>
-            <div className="rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-60"></div>
-          </InfoGraphic>
+            <div className="hidden xs:portrait:flex xs:portrait:items-center xs:portrait:justify-center">
+              <ScenarioPopUp slides = {ConflictResolutionSlides} className = {"hidden xs:portrait:inline-block px-8 py-2 lg:w-52 lg:h-14 bg-[rgb(123,97,355)] text-white text-sm rounded-lg font-semibold hover:bg-[rgb(123,97,355)]/[0.8] hover:shadow-lg"} text = {"Try Now"}></ScenarioPopUp>   
+              <button onClick={() => {sub_title.current?.scrollIntoView({behavior: "smooth"})}} className=" hidden xs:portrait:inline-block px-8 py-2 lg:w-52 lg:h-14 bg-[rgb(74,144,226)] text-white text-sm rounded-lg font-semibold hover:bg-[rgb(74,144,226)]/[0.8] hover:shadow-lg mr-16">
+              Learn More
+              </button>  
+            </div>
+\          </InfoGraphic>
         </Blueframe>
       </Container>
       <ScenarioSection ref = {sub_title}>
