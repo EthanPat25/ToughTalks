@@ -17,11 +17,6 @@ export default function ConflictResolution({animate}: airlineprops) {
       );
   const playerRef = React.useRef<any>(null);
 
-    React.useEffect(() => {
-        playerRef.current?.playFromBeginning();
-   
-    }, [Player])
-
     return (
         <Player 
             size={200}

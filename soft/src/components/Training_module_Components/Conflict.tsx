@@ -11,15 +11,12 @@ interface airlineprops {
 
 export default function Conflict({animate}: airlineprops) {  
 const [windowsize, updatewindowsize] = React.useState(window.innerWidth)
-const [size,updatesize] = React.useState(180) 
+const [size,updatesize] = React.useState(400) 
 const Player: any = dynamic(
         () => import('@lordicon/react').then((mod) => mod.Player),
         { ssr: false }
       );   
   const playerRef = React.useRef<any>(null);
-    React.useEffect(() => {
-        playerRef.current?.playFromBeginning();
-    }, [])
 
        const resize = () => {
             updatewindowsize(window.innerWidth);
@@ -33,14 +30,22 @@ const Player: any = dynamic(
     
         },[])
     
-        React.useEffect(() => {
-            if (windowsize > 768) {
-                updatesize(400)
-            } 
-            else if (windowsize <= 768) {
-                updatesize(250)
-            } 
-        },[windowsize])
+      React.useEffect(() => {
+          if (windowsize >= 3200) {
+          updatesize(600)
+          } else if (windowsize >= 2560) {
+          updatesize(550)
+          } else if (windowsize >= 1920) {
+          updatesize(500)
+          } else if (windowsize >= 1536) {
+          updatesize(450)
+          } else if (windowsize <= 400) {
+            updatesize(250)
+          } else if (windowsize <= 667) {
+          updatesize(300)
+          } 
+  
+  ``  },[windowsize])
 
     return (
         <Player 

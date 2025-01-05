@@ -32,7 +32,7 @@ export function EmblaCarousel({close, slides}:any) {
         {
           slides.map((element: SlideInterface, key: number) => {
             const { ref, inView } = useInView({
-              threshold: 0.2,
+              threshold: 0.8,
             });
             return (
             <Embla_slide key={key} className= " flex flex-col flex-1 rounded-xl justify-center items-center">

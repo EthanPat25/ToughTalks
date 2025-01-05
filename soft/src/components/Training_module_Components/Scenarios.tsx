@@ -12,6 +12,8 @@ import Retailanimation from '@/components/Training_module_Components/retailanima
 import TechSupport from './TechSupport'
 import Conflict from "./Conflict";
 import { WordPullUp } from "../ui/wordPullUp";
+import { FadeText } from "../ui/fadeText";
+
 
 const ScenarioCards = styled.div`
   height: 50vh;
@@ -94,14 +96,15 @@ export const ScenarioSection = React.forwardRef<HTMLDivElement | null>(({}, ref)
             </motion.h4>
             */
             }
-          <motion.h1 
-          style={{fontWeight: "700", color: "#181945", fontSize: "48px"}}
-          initial={{ opacity: 0.4, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{duration: 1}}
-          >
-            Choose a Learning Module
-            </motion.h1>
+
+<FadeText
+        className="text-[48px] font-bold text-[RGB(24,25,69)]"
+        direction="right"
+        framerProps={{
+          show: { transition: { delay: 0.4 } },
+        }}
+        text="Choose a Learning Module"
+      />
         </div>
         <div className = "text-center" style={{width: "50%", display: "flex", alignItems: "center", justifyContent: "center"}}>
           <p className="ml-5" style={{fontWeight: "400", color: "#74758f", fontSize: "18px"}}>Develop Important Soft Skills. Our Learning modules are tailored towards industry relevant scenarios </p>

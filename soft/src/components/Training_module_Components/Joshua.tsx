@@ -16,9 +16,6 @@ export default function Joshua({animate}: airlineprops) {
         { ssr: false }
       );
   const playerRef = React.useRef<any>(null);
-    React.useEffect(() => {
-        playerRef.current?.playFromBeginning();
-    }, [])
 
     const resize = () => {
         updatewindowsize(window.innerWidth);

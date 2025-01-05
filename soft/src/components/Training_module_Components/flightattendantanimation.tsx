@@ -16,12 +16,7 @@ export default function Flight_attendant({animate}: airlineprops) {
     );
   const playerRef = React.useRef<any>(null);
   const [windowsize, updatewindowsize] = React.useState(window.innerWidth)
-  const [size,updatesize] = React.useState(180)
-    React.useEffect(() => {
-        if (animate == true) {
-            playerRef.current?.playFromBeginning();
-        }
-    }, [])
+  const [size,updatesize] = React.useState(400)
 
     const resize = () => {
         updatewindowsize(window.innerWidth);
@@ -36,13 +31,21 @@ export default function Flight_attendant({animate}: airlineprops) {
     },[])
 
     React.useEffect(() => {
-        if (windowsize > 768) {
-            updatesize(400)
+        if (windowsize >= 3200) {
+            updatesize(600)
+        } else if (windowsize >= 2560) {
+            updatesize(550)
+        } else if (windowsize >= 1920) {
+            updatesize(500)
+        } else if (windowsize >= 1536) {
+            updatesize(450)
+        } else if (windowsize <= 400) {
+              updatesize(250)
+        } else if (windowsize <= 667) {
+            updatesize(300)
         } 
-        else if (windowsize <= 768) {
-            updatesize(250)
-        } 
-    },[windowsize])
+      
+``  },[windowsize])
 
     return (
         <div className='h-full w-full'>
