@@ -45,7 +45,7 @@ export function WordPullUp({
       initial="hidden"
       animate={shouldAnimate ? "show" : "hidden"}
       className={cn(
-        "text-[14px] font-semibold text-[rgb(88,63,188)] leading-[5rem] tracking-[-0.02em]",
+        "text-[14px] font-semibold text-[rgb(88,63,188)] leading-[1.5rem] tracking-[-0.02em]",
         className,
       )}
     >
@@ -53,7 +53,7 @@ export function WordPullUp({
         <motion.span
           key={i}
           variants={wordVariants}
-          style={{ display: "inline-block", paddingRight: "4px" }}
+          style={{ display: "inline-block", paddingRight: "4px"}}
         >
           {word === "" ? <span>&nbsp;</span> : word}
         </motion.span>
