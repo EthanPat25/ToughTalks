@@ -5,7 +5,7 @@ import { zodResponseFormat } from "openai/helpers/zod";
 
 const openai = new OpenAI();
 
-interface openAiStructuretype {
+export interface openAiStructuretype {
     feedBack: string,
     score: number,
     satisfactoryCompletion: boolean

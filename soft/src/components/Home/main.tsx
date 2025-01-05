@@ -6,35 +6,25 @@ import dynamic from 'next/dynamic';
 import ScenarioPopUp from '../Training_module_Components/ScenarioPopUp'
 import Conflict from "../Training_module_Components/Conflict";
 
-
 const Container = styled.div`
-    height: 90vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
 `
 
-
 const Blueframe = styled.div`
-    height: 100%;
     width: 96%;
     background-color: #dbeffa;
     border-radius: 60px;
     display: flex;
 `
 
-
-
 const InfoGraphic = styled.div`
-  height: 100%;
 `
-
 
 const StartNow = styled.div`
-  height: 100%;
 `
-
 
 interface BaseMessage {
   role: 'system' | 'user' | 'assistant';
@@ -70,9 +60,9 @@ const Convo = dynamic(() => import("../Training_module_Components/convoanimation
 
   return (
     <section>
-    <Container>
-       <Blueframe className="xs:portrait:flex-col">
-          <StartNow id="startnow" className = "flex flex-col items-start xs:portrait:w-full xs:portrait:pr-[10%] xs:w-1/2 xs:p-[10%] xs:pr-0">
+    <Container className="h-[90vh] xs:portrait:h-[70vh]">
+       <Blueframe className="xs:portrait:flex-col h-full">
+          <StartNow id="startnow" className = "flex flex-col items-start xs:portrait:w-full xs:portrait:pr-[10%] xs:w-1/2 xs:p-[10%] xs:pr-0 h-full xs:portrait:h-32">
             <div className="grow-[0.5] shrink-[1]">
               <Typewriter></Typewriter>
             </div>
@@ -92,15 +82,15 @@ const Convo = dynamic(() => import("../Training_module_Components/convoanimation
             </button>           
               </div>
           </StartNow>
-          <InfoGraphic className="flex w-1/2 xs:portrait:w-full xs:portrait:flex-col justify-center items-center">
+          <InfoGraphic className="flex w-1/2 xs:portrait:w-full xs:portrait:flex-col justify-center items-center h-full xs:portrait:flex-1">
             <Convo></Convo>
-            <div className="hidden xs:portrait:flex xs:portrait:items-center xs:portrait:justify-center">
+            <div className="hidden xs:portrait:flex xs:portrait:items-center xs:portrait:justify-evenly h-32 w-full">
               <ScenarioPopUp slides = {ConflictResolutionSlides} className = {"hidden xs:portrait:inline-block px-8 py-2 lg:w-52 lg:h-14 bg-[rgb(123,97,355)] text-white text-sm rounded-lg font-semibold hover:bg-[rgb(123,97,355)]/[0.8] hover:shadow-lg"} text = {"Try Now"}></ScenarioPopUp>   
-              <button onClick={() => {sub_title.current?.scrollIntoView({behavior: "smooth"})}} className=" hidden xs:portrait:inline-block px-8 py-2 lg:w-52 lg:h-14 bg-[rgb(74,144,226)] text-white text-sm rounded-lg font-semibold hover:bg-[rgb(74,144,226)]/[0.8] hover:shadow-lg mr-16">
+              <button onClick={() => {sub_title.current?.scrollIntoView({behavior: "smooth"})}} className=" hidden xs:portrait:inline-block px-8 py-2 lg:w-52 lg:h-14 bg-[rgb(74,144,226)] text-white text-sm rounded-lg font-semibold hover:bg-[rgb(74,144,226)]/[0.8] hover:shadow-lg">
               Learn More
               </button>  
             </div>
-\          </InfoGraphic>
+          </InfoGraphic>
         </Blueframe>
       </Container>
       <ScenarioSection ref = {sub_title}>

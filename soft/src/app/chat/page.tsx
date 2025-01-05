@@ -15,6 +15,8 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import { useForm, SubmitHandler } from "react-hook-form"
 import FeedBack from "./FeedBack";
 import {openAiStructuretype} from "../../utils/openai"
+import { Suspense } from 'react'
+
 
 localStorage.setItem("ConversationStatus", "closed");
 localStorage.clear();
@@ -64,6 +66,7 @@ export default function ChatPage() {
         satisfactoryCompletion: false
       }));
     const [feedBackDialogState, updateFeedBackDialogState] = React.useState<boolean>(false);
+    const [hasApiResponded, updatehasApiResponded] = React.useState<boolean>(false);
 
     const pageRef = useRef(null);
     const { scrollYProgress } = useScroll({
@@ -184,11 +187,13 @@ Always structure your response in the following strict JSON format:
 
     const ApiRequest = async (data: Input) => {
 
+        updateFeedBackDialogState(true)
+
         let userAnswer: message  = {
             role: "user",
             content: data.Answer
         }
-
+        
         let message_array: Array<message> = [...conversation_History];
         message_array.push(userAnswer);
 
@@ -208,8 +213,8 @@ Always structure your response in the following strict JSON format:
             });
 
             const responseData: openAiStructuretype = await response.json();
-            updateFeedBackResponse(responseData)
-            updateFeedBackDialogState(true);
+            updateFeedBackResponse(responseData);
+            updatehasApiResponded(true);
         } catch {
             console.log("await error");
         } finally {
@@ -369,7 +374,10 @@ Always structure your response in the following strict JSON format:
             </div>
             </div>
 
-            <FeedBack response = {feedBackResponse} state = {feedBackDialogState} ></FeedBack>
+            <Suspense fallback={<p>Loading feed...</p>}>
+                <FeedBack response = {feedBackResponse} isDialogTriggered = {feedBackDialogState} hasApiResponded = {hasApiResponded} updatehasApiResponded = {updatehasApiResponded} updateisDialogTriggered = {updateFeedBackDialogState} ></FeedBack>
+            </Suspense>
+
         </Page>
     );
 }
