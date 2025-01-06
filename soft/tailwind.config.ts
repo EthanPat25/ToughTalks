@@ -16,7 +16,8 @@ const config: Config = {
   theme: {
   	extend: {
 		screens: {
-			'xs': '320px',
+			'xxs': '320px',      // Small, short phones (iPhone SE, iPhone 5, older devices)
+			'xs': '390px',      // Taller modern phones (iPhone 12, 14, newer Android devices)
 			'1.5xl': '1440px',
 			'3xl': '1920px',
 			'4xl': '2560px',

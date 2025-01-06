@@ -39,9 +39,9 @@ export default function Flight_attendant({animate}: airlineprops) {
             updatesize(500)
         } else if (windowsize >= 1536) {
             updatesize(450)
-        } else if (windowsize <= 400) {
-              updatesize(250)
-        } else if (windowsize <= 667) {
+        } else if (windowsize < 390) {
+            updatesize(250)
+        } else if (windowsize >= 390 && windowsize <= 667) {
             updatesize(300)
         } 
       

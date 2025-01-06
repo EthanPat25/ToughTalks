@@ -39,11 +39,11 @@ const Player: any = dynamic(
           updatesize(500)
           } else if (windowsize >= 1536) {
           updatesize(450)
-          } else if (windowsize <= 400) {
+          } else if (windowsize < 390) {
             updatesize(250)
-          } else if (windowsize <= 667) {
-          updatesize(300)
-          } 
+        } else if (windowsize >= 390 && windowsize <= 667) {
+            updatesize(300)
+        } 
   
   ``  },[windowsize])
 

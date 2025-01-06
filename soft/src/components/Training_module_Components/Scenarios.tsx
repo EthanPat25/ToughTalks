@@ -2,7 +2,6 @@
 
 import React from "react";
 import styled from "styled-components";
-import { motion } from "framer-motion";
 import { WobbleCard } from "../ui/wobble-card";
 import ScenarioPopUp from "./ScenarioPopUp";
 import Customer from "./Customer";
@@ -14,12 +13,6 @@ import Conflict from "./Conflict";
 import { WordPullUp } from "../ui/wordPullUp";
 import { FadeText } from "../ui/fadeText";
 
-
-const ScenarioCards = styled.div`
-  height: 50vh;
-  width: 100vw;
-  padding: 2%
-`
 
 const Container = styled.div`
   height: 100vh;
@@ -34,10 +27,6 @@ const ScenarioIntro = styled.div`
   margin-right: 3%;
 `
 
-const ScenarioEnd = styled.div`
-  display: flex;
-  justify-content: center;
-`
 
 const CustomerServiceSlides = [
     {
@@ -84,33 +73,24 @@ export const ScenarioSection = React.forwardRef<HTMLDivElement | null>(({}, ref)
   return (
     <Container className="flex flex-col">
       <ScenarioIntro className="flex-grow-1">
-        <div ref={ref} style={{width: "50%", display: "flex", flexDirection: "column", alignItems: "start", justifyContent: "center"}}>
-        <WordPullUp> The Journey Begins</WordPullUp>
-        { /*
-          <motion.h4 
-          style = {{fontWeight: "600", color: "#583fbc", fontSize: "14px"}}
-           initial = {{ opacity: 0.4, scale: 0.5}}
-           animate={{ opacity: 1, scale: 1 }}
-           transition={{duration: 1}}>
-            The Journey Begins
-            </motion.h4>
-            */
-            }
-
-<FadeText
-        className="text-[48px] font-bold text-[RGB(24,25,69)]"
-        direction="right"
-        framerProps={{
-          show: { transition: { delay: 0.4 } },
-        }}
-        text="Choose a Learning Module"
-      />
+        <div ref={ref} className="xxs:w-[95%] xs:w-[90%] sm:w-1/2" style={{display: "flex", flexDirection: "column", alignItems: "start", justifyContent: "center"}}>
+          <WordPullUp> The Journey Begins</WordPullUp>
+            <FadeText
+              className="xxs:text-[30px] sm:text-[48px] leading-normal font-bold text-[RGB(24,25,69)]"
+              direction="right"
+              framerProps={{
+                show: { transition: { delay: 0.4 } },
+              }}
+              text="Choose a Learning Module"
+            />
         </div>
-        <div className = "text-center" style={{width: "50%", display: "flex", alignItems: "center", justifyContent: "center"}}>
-          <p className="ml-5" style={{fontWeight: "400", color: "#74758f", fontSize: "18px"}}>Develop Important Soft Skills. Our Learning modules are tailored towards industry relevant scenarios </p>
+        <div className = "text-center xxs:hidden sm:flex" style={{width: "50%", alignItems: "center", justifyContent: "center"}}>
+          <p className="ml-5" style={{fontWeight: "400", color: "#74758f", fontSize: "18px"}}>
+            Develop Important Soft Skills. Our Learning modules are tailored towards industry relevant scenarios 
+            </p>
         </div>
       </ScenarioIntro>
-      <div className="grid grid-cols-2 gap-6 gap-y-6 p-6 flex-grow-3 xs:flex xs:flex-wrap lg:flex-nowrap lg:flex-none">
+      <div className="grid grid-cols-2 gap-6 gap-y-6 p-6 flex-grow-3 xxs:flex xxs:flex-wrap lg:flex-nowrap lg:flex-none">
         <WobbleCard containerClassName = " flex min-h-[400px] bg-[rgb(122,87,207)]" >
           <div className="flex justify-center">
             <div className="flex justify-center">
