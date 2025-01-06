@@ -2,6 +2,7 @@
 
 import { Navbar } from "@/components/ui/NavBar";
 import React from "react";
+import Loading from "../chat/loadingAnimation";
 
 export default function RootLayout({
   children,
@@ -9,11 +10,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  return (  
-    <div>
-      <Navbar></Navbar>
-      {children}
-    </div> 
+  const [isComponentMounted, updateIsComponentMounted] = React.useState(false);
+  
+  React.useEffect(() => {
+    updateIsComponentMounted(true);
+  },[])
+
+  return ( 
+    isComponentMounted ? (
+      <div>
+        <Navbar></Navbar>
+        {children}
+      </div>
+    ) : (
+      <Loading></Loading>
+    )
   );
 }
 
