@@ -52,9 +52,9 @@ export function FadeText({
 
   return (
     <motion.div
-    ref={ref}
+      ref={ref}
       initial="hidden"
-      animate="show"
+      animate={inView ? "show" : "hidden"}
       viewport={{ once: true }}
       variants={FADE_ANIMATION_VARIANTS}
     >

@@ -35,7 +35,7 @@ export function WordPullUp({
 }: WordPullUpProps) {
   const MotionComponent = motion.create(Component);
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-30% 0px -30% 0px" });
+  const inView = useInView(ref, { once: true, margin: "0px" });
   const shouldAnimate = startOnView ? inView : true;
 
   return (
