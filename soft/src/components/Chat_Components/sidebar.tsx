@@ -72,6 +72,7 @@ export const Logo = () => {
   return (
 
     <div className="flex space-x-2 items-center py-1 relative z-20">
+
       <div className="h-5 w-6 bg-black dark:bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />
       <motion.span
         initial={{ opacity: 0 }}
