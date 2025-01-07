@@ -15,7 +15,7 @@ export default function Retailanimation({animate}: airlineprops) {
       );    
     const playerRef = React.useRef<any>(null);
     const [windowsize, updatewindowsize] = React.useState(window.innerWidth)
-    const [size,updatesize] = React.useState(50);
+    const [size,updatesize] = React.useState(400);
 
     const resize = () => {
         updatewindowsize(window.innerWidth);

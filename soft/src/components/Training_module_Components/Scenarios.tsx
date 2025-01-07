@@ -73,6 +73,7 @@ export const ScenarioSection = React.forwardRef<HTMLDivElement | null>(({}, ref)
   return (
     <Container className="flex flex-col">
       <ScenarioIntro className="flex-grow-1">
+        
         <div ref={ref} className="xxs:w-[95%] xs:w-[90%] sm:w-1/2" style={{display: "flex", flexDirection: "column", alignItems: "start", justifyContent: "center"}}>
           <WordPullUp> The Journey Begins</WordPullUp>
             <FadeText
@@ -85,8 +86,9 @@ export const ScenarioSection = React.forwardRef<HTMLDivElement | null>(({}, ref)
             />
         </div>
         <div className = "text-center xxs:hidden sm:flex" style={{width: "50%", alignItems: "center", justifyContent: "center"}}>
-          <p className="ml-5" style={{fontWeight: "400", color: "#74758f", fontSize: "18px"}}>
-            Develop Important Soft Skills. Our Learning modules are tailored towards industry relevant scenarios 
+          <p className="ml-5 font-medium text-left mb-5 ml-5" style={{color: "#74758f", fontSize: "18px"}}>
+            Develop Important Soft Skills. Our Learning modules are tailored towards industry relevant scenarios, 
+            helping you to improve communication, and problem-solving in the workplace.
             </p>
         </div>
       </ScenarioIntro>

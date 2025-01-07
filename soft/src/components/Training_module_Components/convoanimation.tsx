@@ -11,7 +11,7 @@ export default function Convo() {
     { ssr: false }
   );
   const [windowsize, updatewindowsize] = React.useState(window.innerWidth)
-  const [size,updatesize] = React.useState(400) 
+  const [size,updatesize] = React.useState(500) 
   const playerRef = React.useRef<any>(null);
 
   const resize = () => {
