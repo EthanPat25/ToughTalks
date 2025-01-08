@@ -9,6 +9,8 @@ import {
 import { AnimatedCircularProgressBar } from '@/components/ui/RatingMeter'
 import {openAiStructuretype} from '../../utils/openai'
 import Loading from './loadingAnimation'
+import {responseError} from "../../utils/openai"
+import RestrictionAnimation from './RestrictionAnimation'
 
 interface Response {
     response: openAiStructuretype;
@@ -38,11 +40,16 @@ const FeedBack = ({response, isDialogTriggered, hasApiResponded, updatehasApiRes
     : {};
 
 
+    function isResponseError(response: openAiStructuretype | responseError): response is responseError {
+          return (response as responseError).error !== undefined;
+    }
+
   return (
+
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTitle className='hidden'>FeedBack</DialogTitle>
         <DialogContent className='h-3/5 w-[80%] sm:h-4/5 sm:w-[60%] rounded-3xl'{...DyanmicProps}>
-        {hasApiResponded ? (
+        {!isResponseError(response) && hasApiResponded ? (
             <>
               <div className="flex-[0.7] flex items-center justify-center">
               <h1 className="text-xl font-semibold">FeedBack</h1>
@@ -60,8 +67,20 @@ const FeedBack = ({response, isDialogTriggered, hasApiResponded, updatehasApiRes
             />
             </div>
             </>
-        ) : (
-            <Loading></Loading>
+        ) : isResponseError(response) && hasApiResponded ? (
+          <>
+          <div className="flex-[0.7] flex items-center justify-center">
+          <h1 className="text-xl font-semibold">Error</h1>
+        </div>
+        <div className="flex-[4]">
+            <p className='text-center'>{response.error}</p>
+        </div>
+        <div className="flex-[0.5] flex justify-center items-center">
+        <RestrictionAnimation animate = {true}></RestrictionAnimation>
+        </div>
+        </>
+        ): (
+          <Loading></Loading>
         )}
       </DialogContent>
     </Dialog>

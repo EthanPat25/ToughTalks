@@ -15,6 +15,7 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import { useForm, SubmitHandler } from "react-hook-form"
 import FeedBack from "./FeedBack";
 import {openAiStructuretype} from "../../utils/openai"
+import {responseError} from "../../utils/openai"
 import { Suspense } from 'react'
 
 
@@ -60,7 +61,7 @@ export default function ChatPage() {
     const [toggleTwo, updatetoggleTwo] = React.useState<string | null>(null)
     const [chatvisibility, updatechatvisibility] = React.useState<string | null>(null)
     const [scenariovisibility, updatescenariovisibility] = React.useState<string | null>('hidden');
-    const [feedBackResponse, updateFeedBackResponse] = React.useState<openAiStructuretype>(({
+    const [feedBackResponse, updateFeedBackResponse] = React.useState<openAiStructuretype | responseError>(({
         feedBack: '',
         score: 0,
         satisfactoryCompletion: false
@@ -212,8 +213,14 @@ Always structure your response in the following strict JSON format:
               body: JSON.stringify(message_array)
             });
 
-            const responseData: openAiStructuretype = await response.json();
-            updateFeedBackResponse(responseData);
+            const responseData = await response.json();
+            if (!response.ok) {
+                updateFeedBackResponse(responseData);
+            } else {
+                updateFeedBackResponse(responseData);
+            }
+
+          
             updatehasApiResponded(true);
         } catch {
             console.log("await error");
@@ -249,7 +256,7 @@ Always structure your response in the following strict JSON format:
             return;
         }
     }
-
+    
     return (
         <Page ref={pageRef}
        // Directly animating the Page component
