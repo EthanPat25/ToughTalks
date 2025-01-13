@@ -11,6 +11,10 @@ export interface openAiStructuretype {
     satisfactoryCompletion: boolean
 }
 
+export interface responseError {
+    error: string, 
+}
+
 const openAiStructure = z.object({
     feedBack: z.string(),
     score: z.number(),

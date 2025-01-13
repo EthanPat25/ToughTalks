@@ -10,7 +10,7 @@ export function VideoDialog({button}:VideoDialogProps) {
     <div className="relative">
       <HeroVideoDialog
         animationStyle="from-center"
-        videoSrc="https://www.youtube.com/embed/PmrkY-EZy74"
+        videoSrc="/P1350231.MP4"
         thumbnailSrc="https://startup-template-sage.vercel.app/hero-dark.png"
         thumbnailAlt="Hero Video"
         button = {button}

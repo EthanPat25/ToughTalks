@@ -5,6 +5,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Play, XIcon } from "lucide-react";
 import React from "react";
+import { DockDemo } from "../Home/DockSocials";
 
 
 import { cn } from "@/lib/utils";
@@ -104,7 +105,7 @@ export function HeroVideoDialog({
             animate={{ opacity: 1 }}
             onClick={() => setIsVideoOpen(false)}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-md"
+            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/50 backdrop-blur-md"
           >
             <motion.div
               {...selectedAnimation}
@@ -123,7 +124,10 @@ export function HeroVideoDialog({
                 ></iframe>
               </div>
             </motion.div>
+            <DockDemo></DockDemo>
+
           </motion.div>
+          
         )}
       </AnimatePresence>
 
