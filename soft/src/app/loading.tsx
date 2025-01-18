@@ -1,5 +1,5 @@
 "use client"
-import Loading from "./chat/loadingAnimation"
+import Loading from "./training/loadingAnimation"
 
 export default function Load() {
     return (<Loading></Loading> );
