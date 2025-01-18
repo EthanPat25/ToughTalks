@@ -86,14 +86,14 @@ export const ScenarioSection = React.forwardRef<HTMLDivElement | null>(({}, ref)
             />
         </div>
         <div className = "text-center xxs:hidden sm:flex" style={{width: "50%", alignItems: "center", justifyContent: "center"}}>
-          <p className="ml-5 font-medium text-left mb-5 ml-5" style={{color: "#74758f", fontSize: "18px"}}>
+          <p className="ml-5 font-medium text-left mb-5" style={{color: "#74758f", fontSize: "18px"}}>
             Develop Important Soft Skills. Our Learning modules are tailored towards industry relevant scenarios, 
             helping you to improve communication, and problem-solving in the workplace.
             </p>
         </div>
       </ScenarioIntro>
       <div className="grid grid-cols-2 gap-6 gap-y-6 p-6 flex-grow-3 xxs:flex xxs:flex-wrap lg:flex-nowrap lg:flex-none">
-        <WobbleCard containerClassName = " flex min-h-[400px] bg-[rgb(122,87,207)]" >
+        <WobbleCard containerClassName = " flex min-h-[400px] bg-[rgb(122,87,207)]" slides = {CustomerServiceSlides}>
           <div className="flex justify-center">
             <div className="flex justify-center">
 
@@ -109,13 +109,11 @@ export const ScenarioSection = React.forwardRef<HTMLDivElement | null>(({}, ref)
                 scenarios which include retail, tech support and more!
               </p>
             </div>
-            <div className="flex justify-center mt-8">
-
-            <ScenarioPopUp slides = {CustomerServiceSlides} className = {"px-6 py-2 bg-[rgb(58,80,244)] text-white rounded-lg font-bold transform hover:-translate-y-1 transition duration-400"} text = {"Start Training Now"}></ScenarioPopUp>
-        
+            <div className="flex justify-center mt-8">        
             </div>
         </WobbleCard>
-        <WobbleCard containerClassName = "min-h-[400px] bg-[rgb(90,159,243)]">
+
+        <WobbleCard containerClassName = "min-h-[400px] bg-[rgb(90,159,243)]" slides = {ConflictResolutionSlides}>
           <div className="flex justify-center">
           <ConflictResolution animate = {true}></ConflictResolution>
           </div>
@@ -129,10 +127,8 @@ export const ScenarioSection = React.forwardRef<HTMLDivElement | null>(({}, ref)
                practical ways to bring the conflict to a resolution.
               </p>
           </div>
-          <div className="flex justify-center mt-7">
-          <ScenarioPopUp slides = {ConflictResolutionSlides} className = {"px-6 py-2 bg-[rgb(58,80,244)] text-white rounded-lg font-bold transform hover:-translate-y-1 transition duration-400"} text = {"Start Training Now"}></ScenarioPopUp>
-          </div>
         </WobbleCard>
+
       </div>
   </Container>
   );

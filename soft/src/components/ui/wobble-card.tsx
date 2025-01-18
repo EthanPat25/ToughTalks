@@ -2,20 +2,31 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "../../utils/cn";
+import ScenarioPopUp from "../Training_module_Components/ScenarioPopUp";
+import {SlideInterface} from '../Training_module_Components/Slide'
+
+
+interface hovertype {
+  hover: boolean
+}
 
 export const WobbleCard = ({
   children,
   containerClassName,
   className,
+  slides,
 }: {
   children: React.ReactNode;
   containerClassName?: string;
   className?: string;
+  slides: Array<SlideInterface>;
 }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isTracking, updateIsTracking] = useState(true)
 
   const handleMouseMove = (event: React.MouseEvent<HTMLElement>) => {
+    if (isTracking === false) return;
     const { clientX, clientY } = event;
     const rect = event.currentTarget.getBoundingClientRect();
     const x = (clientX - (rect.left + rect.width / 2)) / 20;
@@ -58,7 +69,11 @@ export const WobbleCard = ({
           className={cn("h-full px-4 py-20 sm:px-10", className)}
         >
           <Noise />
+          
           {children}
+          <div className="flex justify-center mt-7">
+            <ScenarioPopUp slides = {slides} className = {"px-6 py-2 bg-[rgb(58,80,244)] text-white rounded-lg font-bold transform hover:-translate-y-1 transition duration-400"} text = {"Start Training Now"} isHovering = {setIsHovering} isTracking = {updateIsTracking}></ScenarioPopUp>
+          </div>
         </motion.div>
       </div>
     </motion.section>
