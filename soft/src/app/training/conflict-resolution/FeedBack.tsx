@@ -7,10 +7,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { AnimatedCircularProgressBar } from '@/components/ui/RatingMeter'
-import {openAiStructuretype} from '../../utils/openai'
-import Loading from './loadingAnimation'
-import {responseError} from "../../utils/openai"
-import RestrictionAnimation from './RestrictionAnimation'
+import {openAiStructuretype} from '../../../utils/openai'
+import Loading from '../loadingAnimation'
+import {responseError} from "../../../utils/openai"
+import RestrictionAnimation from '../RestrictionAnimation'
 
 interface Response {
     response: openAiStructuretype;
