@@ -22,8 +22,6 @@ interface ScenarioPopUpProps {
 
 const ScenarioPopUp = ({slides, className, text, isHovering, isTracking}: ScenarioPopUpProps) => {
 
-  console.log("yoyoyo");
-
   return (
     <Dialog modal = {true}>
       <DialogTitle className='hidden'>Training Module Selection: {text}</DialogTitle>
