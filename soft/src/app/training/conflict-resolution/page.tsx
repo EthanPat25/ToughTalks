@@ -4,9 +4,9 @@ import styled from "styled-components"
 import { message } from "../../../components/Home/main";
 import { Textarea }  from "../../../components/ui/TextArea"
 import { Button } from "../../../components/ui/button"
-import Joshua from "@/components/Training_module_Components/Joshua";
+import {Joshua} from "@/components/Training_module_Components/Joshua";
 import { Progress } from "../../../components/ui/ProgressBar"
-import Ryan from "@/components/Training_module_Components/Ryan";
+import {Ryan} from "@/components/Training_module_Components/Ryan";
 import { useScroll, useSpring, useTransform} from "motion/react";
 import { useForm} from "react-hook-form"
 import FeedBack from "./FeedBack";

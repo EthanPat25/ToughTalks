@@ -43,8 +43,9 @@ const ConflictResolutionSlides = [
     index: 0,
     AnimationComponent: Conflict,
     inView: false,
-    link: "/chat",
-    buttonColor: "rgb(145,20,12)"
+    link: "/training/conflict-resolution",
+    buttonColor: "rgb(145,20,12)",
+    completed: true
   },
 ]
 

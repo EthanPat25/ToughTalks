@@ -35,7 +35,8 @@ const CustomerServiceSlides = [
       AnimationComponent: Flight_attendant,
       inView: false,
       link: "/chat",
-      buttonColor: "rgb(145,20,12)"
+      buttonColor: "rgb(145,20,12)",
+      completed: false
     },
     {
       title: "Retail Scenario",
@@ -43,15 +44,17 @@ const CustomerServiceSlides = [
       AnimationComponent: Retailanimation,
       inView: false,
       link: "/chat",
-      buttonColor: "rgb(255,146,72)"
+      buttonColor: "rgb(255,146,72)",
+      completed: false
     },
     {
-      title: "Tech Support Scenario",
+      title: "IT Support Scenario",
       index: 2,
       AnimationComponent: TechSupport,
       inView: false,
       link: "/chat",
-      buttonColor: "rgb(17,10,92)"
+      buttonColor: "rgb(17,10,92)",
+      completed: false
     }
   ]
 
@@ -62,8 +65,9 @@ const ConflictResolutionSlides = [
     index: 0,
     AnimationComponent: Conflict,
     inView: false,
-    link: "/chat",
-    buttonColor: "rgb(145,20,12)"
+    link: "/training/conflict-resolution",
+    buttonColor: "rgb(145,20,12)",
+    completed: true
   },
 ]
  

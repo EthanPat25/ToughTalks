@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { Tag } from "../ui/Tag";
 
 export interface SlideInterface {
     title: string;
@@ -8,10 +9,11 @@ export interface SlideInterface {
     inView: boolean;
     link: string;
     buttonColor: string;
+    completed: boolean;
 }
 
 export const Slide = React.forwardRef<HTMLHeadingElement, SlideInterface>(
-  ({ title, index, AnimationComponent, inView, link, buttonColor}, ref) => {
+  ({ title, index, AnimationComponent, inView, link, buttonColor, completed}, ref) => {
     console.log("CurrentSlide: " + index + " SlidesInView: " + inView);
 
     return (
@@ -27,7 +29,7 @@ export const Slide = React.forwardRef<HTMLHeadingElement, SlideInterface>(
             <></>
           )}
         </div>
-        <div className="flex-[0.5] flex justify-center items-center">
+        <div className="flex-[0.5] flex justify-center items-center relative">
           <button
             className="px-8 py-2 rounded-md text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent"
             style={{
@@ -37,6 +39,13 @@ export const Slide = React.forwardRef<HTMLHeadingElement, SlideInterface>(
           >
             <Link href={link}>Try Now</Link>
           </button>
+          {
+            completed ? (
+              <></>
+            ) : (
+              <Tag name = "Coming Soon"></Tag>
+            )
+          }
         </div>
       </>
     );

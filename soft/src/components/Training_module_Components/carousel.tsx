@@ -8,6 +8,7 @@ import {SlideInterface} from './Slide'
 import styled from 'styled-components'
 import { EmblaCarouselType} from 'embla-carousel'
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
+import { Tag } from '../ui/Tag'
 
 {/* At the top */}
 import { useInView } from "react-intersection-observer";
@@ -39,6 +40,7 @@ export function EmblaCarousel({close, slides}:any) {
               <Slide {...element} inView = {inView} ref = {ref}></Slide>
             </Embla_slide>
             )
+
           })
         }
       </Embla_container>

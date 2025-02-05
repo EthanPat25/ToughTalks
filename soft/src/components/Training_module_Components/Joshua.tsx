@@ -8,7 +8,8 @@ interface airlineprops {
     animate: boolean;
 }
 
-export default function Joshua({animate}: airlineprops) {   
+export const Joshua = React.memo(({ animate }: airlineprops) => {
+    // Component code
     const [windowsize, updatewindowsize] = React.useState(window.innerWidth)
     const [size,updatesize] = React.useState(200) 
     const Player: any = dynamic(
@@ -58,4 +59,5 @@ export default function Joshua({animate}: airlineprops) {
               }} />
 
     );
-}
+});
+

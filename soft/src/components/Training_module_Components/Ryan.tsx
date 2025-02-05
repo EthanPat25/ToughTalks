@@ -9,8 +9,9 @@ interface airlineprops {
     animate: boolean;
 }
 
-export default function Ryan({animate}: airlineprops) {   
-      const [windowsize, updatewindowsize] = React.useState(window.innerWidth)
+export const Ryan = React.memo(({ animate }: airlineprops) => {
+    // Component code
+    const [windowsize, updatewindowsize] = React.useState(window.innerWidth)
       const [size,updatesize] = React.useState(200) 
 const Player: any = dynamic(
         () => import('@lordicon/react').then((mod) => mod.Player),
@@ -59,4 +60,5 @@ const Player: any = dynamic(
               }}
         />
     );
-}
+});
+
