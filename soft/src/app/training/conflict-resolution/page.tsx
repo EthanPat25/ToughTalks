@@ -6,18 +6,17 @@ import { Textarea }  from "../../../components/ui/TextArea"
 import { Button } from "../../../components/ui/button"
 import {Joshua} from "@/components/Training_module_Components/Joshua";
 import { Progress } from "../../../components/ui/ProgressBar"
-import {Ryan} from "@/components/Training_module_Components/Ryan";
 import { useScroll, useSpring, useTransform} from "motion/react";
 import { useForm} from "react-hook-form"
 import FeedBack from "./FeedBack";
 import {openAiStructuretype} from "../../../utils/openai"
 import {responseError} from "../../../utils/openai"
 import { Suspense } from 'react'
-import { Conversation } from "@/app/api/conversations/[id]/route";
 import { DialogWithAvatarProps } from "@/app/api/conversations/[id]/route";
 import { DialogWithAvatar } from "./DialogWithAvatar";
 import { ConflictOverview } from "./ConflictOverview";
 import { IconArrowNarrowRight, IconArrowNarrowLeft } from "@tabler/icons-react";
+import { LoadingContext } from "./LoadingWrapper";
 
 localStorage.setItem("ConversationStatus", "closed");
 localStorage.clear();
@@ -49,21 +48,23 @@ const ScenarioArea = styled.div`
 type Input = {
     Answer: string
 }
+    
 
 export default function ChatPage({params}:any) {
+
+    
+    const context = React.useContext(LoadingContext);
+    const { feedbackSess, currentPage, updateCurrentPage, ScenarioCount, updateFeedbackSession, updateScenariocount} = context;
     const [isComponentMounted, updateIsComponentMounted] = React.useState(false);
     const [button_disabled, update_button_disabeld] = React.useState(false);
     const [chatvisibility, updatechatvisibility] = React.useState<string | null>(null)
-    const [ScenarioCount, updateScenariocount] = React.useState<number>(4);
     const [feedBackResponse, updateFeedBackResponse] = React.useState<openAiStructuretype | responseError>(({
         feedBack: '',
         score: 0,
         satisfactoryCompletion: false
       }));
-    const [currentPage, updateCurrentPage] = React.useState<number>(1);
     const [feedBackDialogState, updateFeedBackDialogState] = React.useState<boolean>(false);
     const [hasApiResponded, updatehasApiResponded] = React.useState<boolean>(false);
-    const [feedbackSess, updateFeedbackSession] = React.useState<Conversation>(); 
     const [buttoncounter, updatebuttoncounter] = React.useState<number>(1);
     const pageRef = useRef(null);
 const [scrollReady, setScrollReady] = React.useState(false);
@@ -135,41 +136,6 @@ const scaleX = useSpring(transform, {
         }
     }
     
-
-    const conversationApi: () => Promise<Conversation> = async () => {
-        const response = await fetch(`/api/conversations/${currentPage}`, {
-            method: 'GET',
-        });
-        return await response.json();
-    };
-
-    const ScenarioCountApi: () => Promise<Array<Conversation>> = async () => {
-        const response = await fetch(`/api/conversations/all`, {
-            method: 'GET',
-        });
-        return await response.json();
-    }
-
-    React.useEffect(() => {
-        const fetchData = async () => {
-            const data = await conversationApi();
-            updateFeedbackSession(data); 
-        };
-
-        fetchData();
-    }, [currentPage]);
-
-
-    React.useEffect(() => {
-        const fetchData = async () => {
-            const data = await ScenarioCountApi();
-            console.log("lenght " + data.length);
-            updateScenariocount(data.length); 
-        };
-
-        fetchData();
-    }, []);
-
     React.useEffect(() => {
         updateIsComponentMounted(true);
       },[])
@@ -178,7 +144,10 @@ const scaleX = useSpring(transform, {
         console.log("updated" + scaleX);
       }, [scaleX])
 
-    return (
+    
+
+    return ( 
+
         <Page ref={pageRef} className="bg-white h-full w-full flex-grow flex flex-col overflow-scroll" id="hello">
             <ScenarioOverview className={`bg-white flex justify-center items-center grow-[1] shrink-[1] basis-0 w-full rounded-br-lg rounded-bl-lg sticky top-0 z-50 ${scrollReady ? "flex" : "hidden"}`}>
                 <Progress scaleX = {scrollReady ? scaleX : 0} className="w-1/5 mb-10 sticky top-1 mt-10" />
@@ -249,6 +218,6 @@ const scaleX = useSpring(transform, {
         )
 
         }
-        </Page>
+        </Page>  
     );
 }

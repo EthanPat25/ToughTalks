@@ -1,5 +1,5 @@
 
-import { SidebarDemo } from "../../components/Chat_Components/sidebar";
+import { SidebarDemo } from "../../../components/Chat_Components/sidebar";
 import React from "react"
 import LoadingWrapper from "./LoadingWrapper"
 
@@ -10,18 +10,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
-
   return (
-    <>
-    <LoadingWrapper
-      ChildrenComponents={
+    <LoadingWrapper children = {
         <div>
-          <SidebarDemo>{children}</SidebarDemo>
+            <SidebarDemo>{children}</SidebarDemo>
         </div>
-      }
-    />
-  </>
-  
+    }/>
   );
-  
 }
