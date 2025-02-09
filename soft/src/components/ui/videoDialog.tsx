@@ -93,9 +93,6 @@ export function HeroVideoDialog({
   return (
 
     <>
-
-    
-
 {clonedButton}
 
       <AnimatePresence>
