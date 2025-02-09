@@ -4,6 +4,8 @@ import { Daniel } from "@/components/Training_module_Components/Daniel";
 import { Joshua } from "@/components/Training_module_Components/Joshua";
 import { Ryan } from "@/components/Training_module_Components/Ryan";
 import { Zoe } from "@/components/Training_module_Components/Zoe";
+import { Mia } from "@/components/Training_module_Components/Mia";
+import { Emma } from "@/components/Training_module_Components/Emma";
 import React from "react";
 
 
@@ -38,6 +40,8 @@ export function DialogWithAvatar({alignment, Avatar, name, conversation}:DialogW
         Ryan: Ryan,
         Daniel: Daniel,
         Zoe: Zoe,
+        Mia: Mia,
+        Emma: Emma,
     }[name] || null;
 
     return (
