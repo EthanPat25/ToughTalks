@@ -2,13 +2,10 @@
 
 import React from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
-import {Slide} from './Slide'
-import {SlideInterface} from './Slide'
-
+import {CarouselSlide} from './CarouselSlide'
+import {SlideInterface} from './CarouselSlide'
 import styled from 'styled-components'
-import { EmblaCarouselType} from 'embla-carousel'
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
-import { Tag } from '../ui/Tag'
 
 {/* At the top */}
 import { useInView } from "react-intersection-observer";
@@ -24,7 +21,7 @@ const Embla_slide = styled.div`
     min-width: 0;
 `
 
-export function EmblaCarousel({close, slides}:any) {
+export function Carousel({slides, updateIsTryNowTriggered}:any) {
   const [emblaRef,emblaapi] = useEmblaCarousel({loop: true, inViewThreshold: 0.9})  
 
   return (
@@ -37,7 +34,8 @@ export function EmblaCarousel({close, slides}:any) {
             });
             return (
             <Embla_slide key={key} className= " flex flex-col flex-1 rounded-xl justify-center items-center">
-              <Slide {...element} inView = {inView} ref = {ref}></Slide>
+              <CarouselSlide {...element} inView = {inView} ref = {ref} updateIsTryNowTriggered = {updateIsTryNowTriggered}>
+              </CarouselSlide>
             </Embla_slide>
             )
 
