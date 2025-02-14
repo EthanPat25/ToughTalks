@@ -20,7 +20,7 @@ export const LoadingContext = React.createContext<LoadingContextProps>({
     updateCurrentPage: () => {},
     ScenarioCount: 4,
     updateScenariocount: () => {},
-  });
+});
 
 interface LoadingWrapperProps {
     children: React.ReactNode; 
