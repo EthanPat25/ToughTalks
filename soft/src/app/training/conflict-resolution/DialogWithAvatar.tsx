@@ -49,7 +49,7 @@ export function DialogWithAvatar({alignment, Avatar, name, conversation}:DialogW
             <div className="relative">
                 <div>
                     {
-                        AvatarComponent ? <AvatarComponent animate={true} /> : <h1>Faailed to Load</h1>
+                        AvatarComponent ? <AvatarComponent animate={true} /> : <h1>Failed to Load</h1>
                     }
                 </div>
                 <h2 className="text-center font-semibold">
