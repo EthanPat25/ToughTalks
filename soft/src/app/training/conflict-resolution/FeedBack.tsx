@@ -48,7 +48,7 @@ const FeedBack = ({response, isDialogTriggered, hasApiResponded, updatehasApiRes
 
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTitle className='hidden'>FeedBack</DialogTitle>
-        <DialogContent className='h-3/5 w-[80%] sm:h-4/5 sm:w-[60%] rounded-3xl'{...DyanmicProps}>
+        <DialogContent className='h-3/5 w-[80%] sm:h-4/5 sm:w-[60%] rounded-3xl p-6'{...DyanmicProps}>
         {!isResponseError(response) && hasApiResponded ? (
             <>
               <div className="flex-[0.7] flex items-center justify-center">
