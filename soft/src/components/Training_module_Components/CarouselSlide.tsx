@@ -12,14 +12,17 @@ export interface SlideInterface {
     completed: boolean;
 }
 
-export const Slide = React.forwardRef<HTMLHeadingElement, SlideInterface>(
-  ({ title, index, AnimationComponent, inView, link, buttonColor, completed}, ref) => {
+interface CarouselSlideProps extends SlideInterface {
+  updateIsTryNowTriggered: (value: boolean) => void;
+}
+
+export const CarouselSlide = React.forwardRef<HTMLHeadingElement, CarouselSlideProps>(
+  ({ title, index, AnimationComponent, inView, link, buttonColor, completed, updateIsTryNowTriggered}, ref) => {
     console.log("CurrentSlide: " + index + " SlidesInView: " + inView);
 
     return (
       <>
         <div className="flex-[0.7] flex items-center">
-          {/* Apply the ref here */}
           <h1 ref={ref} className="text-xl font-semibold">{title}</h1>
         </div>
         <div className="flex-[4]">
@@ -30,22 +33,53 @@ export const Slide = React.forwardRef<HTMLHeadingElement, SlideInterface>(
           )}
         </div>
         <div className="flex-[0.5] flex justify-center items-center relative">
+
+          {
+
+    
+        completed ? (
+
+          <Link href={link}>
+
           <button
             className="px-8 py-2 rounded-md text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent"
             style={{
               backgroundColor: buttonColor,
               borderColor: buttonColor,
             }}
+           
           >
-            <Link href={link}>Try Now</Link>
-          </button>
-          {
-            completed ? (
-              <></>
-            ) : (
-              <Tag name = "Coming Soon"></Tag>
-            )
-          }
+            Try Now
+             </button>
+          
+          </Link>
+
+        ) : (
+          <>
+          <button
+            className="px-8 py-2 rounded-md text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent"
+            style={{
+              backgroundColor: buttonColor,
+              borderColor: buttonColor,
+            }}
+            onClick={() => {
+              if (!completed) {
+                updateIsTryNowTriggered(true)
+              }
+            }}
+          >
+            Try Now
+
+</button>
+
+<Tag name = "Coming Soon"></Tag>
+
+</>
+
+        )
+
+      }
+
         </div>
       </>
     );

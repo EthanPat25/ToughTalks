@@ -2,12 +2,11 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "../../utils/cn";
-import ScenarioPopUp from "../Training_module_Components/ScenarioPopUp";
-import {SlideInterface} from '../Training_module_Components/Slide'
-
+import TrainingModuleDialog from "../Training_module_Components/TrainingModuleDialog";
+import { SlideInterface } from "../Training_module_Components/CarouselSlide";
 
 interface hovertype {
-  hover: boolean
+  hover: boolean;
 }
 
 export const WobbleCard = ({
@@ -23,10 +22,10 @@ export const WobbleCard = ({
 }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
-  const [isTracking, updateIsTracking] = useState(true)
+  const [isMouseTracking, updateIsMouseTracking] = useState(true);
 
   const handleMouseMove = (event: React.MouseEvent<HTMLElement>) => {
-    if (isTracking === false) return;
+    if (isMouseTracking === false) return;
     const { clientX, clientY } = event;
     const rect = event.currentTarget.getBoundingClientRect();
     const x = (clientX - (rect.left + rect.width / 2)) / 20;
@@ -66,13 +65,19 @@ export const WobbleCard = ({
               : "translate3d(0px, 0px, 0) scale3d(1, 1, 1)",
             transition: "transform 0.1s ease-out",
           }}
-          className={cn("h-full px-4 py-20 sm:px-10", className)}
+          className={cn("h-full px-4 py-14 sm:px-10", className)}
         >
-          <Noise />
-          
           {children}
-          <div className="flex justify-center mt-7">
-            <ScenarioPopUp slides = {slides} className = {"px-6 py-2 bg-[rgb(58,80,244)] text-white rounded-lg font-bold transform hover:-translate-y-1 transition duration-400"} text = {"Start Training Now"} isHovering = {setIsHovering} isTracking = {updateIsTracking}></ScenarioPopUp>
+          <div className="flex justify-center">
+            <TrainingModuleDialog
+              slides={slides}
+              className={
+                "px-6 py-2 bg-[rgb(58,80,244)] text-white rounded-lg font-bold text-xl transform hover:-translate-y-1 transition duration-400"
+              }
+              text={"Start Training Now"}
+              isHovering={setIsHovering}
+              isMouseTracking={updateIsMouseTracking}
+            ></TrainingModuleDialog>
           </div>
         </motion.div>
       </div>
@@ -83,7 +88,7 @@ export const WobbleCard = ({
 const Noise = () => {
   return (
     <div
-      className="absolute inset-0 w-full h-full scale-[1.2] transform opacity-10 [mask-image:radial-gradient(#fff,transparent,75%)]"
+      className="w-full h-full scale-[1.2] transform opacity-10 [mask-image:radial-gradient(#fff,transparent,75%)]"
       style={{
         backgroundImage: "url(/noise.webp)",
         backgroundSize: "30%",

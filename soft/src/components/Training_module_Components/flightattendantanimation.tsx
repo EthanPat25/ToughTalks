@@ -1,64 +1,59 @@
-"use client"
+"use client";
 
-import React from 'react';
-import dynamic from 'next/dynamic';
-const ICON = require('../../../public/flight_attendant.json');
+import React from "react";
+import dynamic from "next/dynamic";
+const ICON = require("../../../public/flight_attendant.json");
 
-interface airlineprops {
-    animate: boolean;
+interface AirlineProps {
+  animate: boolean;
 }
 
-export default function Flight_attendant({animate}: airlineprops) {   
+export default function Flight_attendant({ animate }: AirlineProps) {
+  const Player: any = dynamic(
+    () => import("@lordicon/react").then((mod) => mod.Player),
+    { ssr: false }
+  );
 
-    const Player: any = dynamic(
-        () => import('@lordicon/react').then((mod) => mod.Player),
-        { ssr: false }
-    );
   const playerRef = React.useRef<any>(null);
-  const [windowsize, updatewindowsize] = React.useState(window.innerWidth)
-  const [size,updatesize] = React.useState(400)
+  const [size, setSize] = React.useState(200);
 
-    const resize = () => {
-        updatewindowsize(window.innerWidth);
-    }
+  React.useEffect(() => {
+    let timeout: NodeJS.Timeout;
 
-    React.useEffect(() => {
-        window.addEventListener('resize', resize)
-        return () => (
-            window.removeEventListener('resize', resize)
+    const handleResize = () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        const scale = Math.min(
+          window.innerWidth * 0.5, // 20% of width
+          window.innerHeight * 0.5 // 20% of height
         );
+        setSize(scale);
+      }, 100); // debounce
+    };
 
-    },[])
+    handleResize(); // set initial
+    window.addEventListener("resize", handleResize);
 
-    React.useEffect(() => {
-        if (windowsize >= 3200) {
-            updatesize(600)
-        } else if (windowsize >= 2560) {
-            updatesize(550)
-        } else if (windowsize >= 1920) {
-            updatesize(500)
-        } else if (windowsize >= 1536) {
-            updatesize(450)
-        } else if (windowsize < 390) {
-            updatesize(250)
-        } else if (windowsize >= 390 && windowsize <= 667) {
-            updatesize(300)
-        } 
-      
-``  },[windowsize])
+    return () => {
+      clearTimeout(timeout);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
-    return (
-        <div className='h-full w-full'>
-                  <Player 
-            size={size}
-            icon={ ICON }
-            ref={(instance: typeof Player) => {
-                if (instance) {
-                  playerRef.current = instance; // Assign ref
-                  playerRef.current.playFromBeginning?.(); // Trigger animation
-                }
-              }}
-        />
-        </div>
-    );
+  return (
+    <div className="h-full w-full flex items-center justify-center">
+      <Player
+        size={size}
+        icon={ICON}
+        ref={(instance: typeof Player) => {
+          if (instance) {
+            playerRef.current = instance;
+            if (animate) {
+              playerRef.current.playFromBeginning?.();
+            }
+          }
+        }}
+      />
+    </div>
+  );
 }
